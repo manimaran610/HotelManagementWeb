@@ -1,0 +1,18 @@
+﻿@model HotelManagementWeb.Models.Room
+
+@{
+    ViewBag.Title = "AddRoomPost";
+}
+
+<h2>AddRoomPost</h2>
+
+
+<h1>@Model.RoomNumber</h1>
+<h1>@Model.BookingStatusId</h1>
+<h1>@Model.RoomTypeId</h1>
+@if(Model.UploadedImage != null) { 
+<h1>@Model.UploadedImage.FileName</h1>}
+
+<h1>@Model.RoomImage</h1>
+<h1>@Model.RoomDescription</h1>
+<h1>@Model.RoomCapacity</h1>

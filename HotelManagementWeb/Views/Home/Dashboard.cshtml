@@ -1,0 +1,46 @@
+﻿
+@model IEnumerable<HotelManagementWeb.Models.Room>
+@{
+    ViewBag.Title = "Dashboard";
+}
+
+<h2>Dashboard</h2>
+
+<a class="btn btn-danger" href="@Url.Action("AddRoom")">Add Room</a>
+
+
+
+<table class="table table-bordered" style="margin-top:20px">
+    <tr>
+        <th>Room Number</th>
+        <th>Image</th>
+        <th>Type</th>
+        <th>Capacity</th>
+        <th>BookingStatus</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Action</th>
+    </tr>
+
+    @foreach (var data in Model)
+    {
+        <tr>
+          
+            <td>@data.RoomNumber</td>
+            <td><img src="~/RoomImages/@data.RoomImage" height="30px" width="40px"></td>
+            <td>@data.Type</td>
+            <td>@data.RoomCapacity</td>
+            <td>@data.Status</td>
+            <td>@data.RoomDescription</td>
+            <td>@data.RoomPrice</td>
+            <td>
+                <a class="btn btn-primary btn-sm" style="margin-right:5px" href="@Url.Action("AddRoom", data)">Edit</a>
+                <a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#@data.RoomId">Delete</a>
+            </td>
+
+            @{Html.RenderPartial("ConfirmDelete", data);}
+
+        </tr>
+
+}
+</table>

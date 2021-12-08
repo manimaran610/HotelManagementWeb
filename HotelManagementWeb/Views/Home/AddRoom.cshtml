@@ -1,0 +1,76 @@
+﻿@model HotelManagementWeb.Models.Room
+@{
+    ViewBag.Title = "AddRoom";
+}
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+   
+    function previewFile(input) {
+
+        var file = $("input[type=file]").get(0).files[0];
+
+        if (file) {
+            var reader = new FileReader();
+
+            reader.onload = function () {
+                $("#previewImg").attr("src", reader.result);
+            }
+
+            reader.readAsDataURL(file);
+        }
+    }
+</script>
+<h2>AddRoom</h2>
+<div>
+    @using (Html.BeginForm("AddRoomPost", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+
+        <div class="form-group ">
+            @Html.LabelFor(item => item.RoomNumber)
+            @Html.TextBoxFor(item => item.RoomNumber, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(item => item.RoomPrice)
+            @Html.TextBoxFor(item => item.RoomPrice, new { @class = "form-control" })
+        </div>
+
+
+        @Html.LabelFor(item => item.RoomTypeId)
+        @Html.DropDownListFor(item => item.RoomTypeId, new SelectList(Model.RoomTypeList, "RoomTypeId", "RoomType", 2), new { @class = "form-control" })
+
+
+        @Html.LabelFor(item => item.BookingStatusId)
+        @Html.DropDownListFor(item => item.BookingStatusId, new SelectList(Model.BookStatusList, "BookingStatusId", "Status"), new { @class = "form-control" })
+
+        <div class="form-group">
+            @Html.LabelFor(item => item.RoomImage)
+            <input type="file" class="form-control" name="UploadedImage" id="UploadedImage" onchange="previewFile(this)" />
+        </div>
+        <div>
+            @if (Model.RoomImage != null)
+            {
+                <img class="img img-responsive " src="~/RoomImages/@Model.RoomImage" id="previewImg" style="height:105px" aria-hidden="true" />
+                @Html.HiddenFor(item => item.RoomImage)
+                @Html.HiddenFor(item => item.RoomId)
+            }
+            else
+            {
+                <img class="img img-responsive " src="" id="previewImg" style="height:105px" aria-hidden="true" />
+            }
+        </div>
+
+           
+        <div class="form-group">
+            @Html.LabelFor(item => item.RoomCapacity)
+            @Html.TextBoxFor(item => item.RoomCapacity, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(item => item.RoomDescription)
+            @Html.TextAreaFor(item => item.RoomDescription, new { @class = "form-control" })
+        </div>
+        <input type="submit" class="btn btn-success" onclick="update()" value="Add Room" />
+
+
+    }
+</div>
