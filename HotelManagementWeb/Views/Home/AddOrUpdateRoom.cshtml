@@ -1,6 +1,9 @@
 ﻿@model HotelManagementWeb.Models.Room
 @{
-    ViewBag.Title = "AddRoom";
+    
+    Html.EnableClientValidation(true);
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
 }
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -21,32 +24,39 @@
         }
     }
 </script>
-<h2>AddRoom</h2>
+<style>
+    
+</style>
+<h2>@ViewBag.Title</h2>
 <div>
     @using (Html.BeginForm("AddRoomPost", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
-
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group ">
             @Html.LabelFor(item => item.RoomNumber)
             @Html.TextBoxFor(item => item.RoomNumber, new { @class = "form-control" })
+            @Html.ValidationMessageFor(item => item.RoomNumber, "", new { @class = "text-danger" })
         </div>
         <div class="form-group">
             @Html.LabelFor(item => item.RoomPrice)
             @Html.TextBoxFor(item => item.RoomPrice, new { @class = "form-control" })
+            @Html.ValidationMessageFor(item => item.RoomPrice, "", new { @class = "text-danger" })
         </div>
 
 
         @Html.LabelFor(item => item.RoomTypeId)
-        @Html.DropDownListFor(item => item.RoomTypeId, new SelectList(Model.RoomTypeList, "RoomTypeId", "RoomType", 2), new { @class = "form-control" })
+        @Html.DropDownListFor(item => item.RoomTypeId, new SelectList(Model.RoomTypeList, "RoomTypeId", "RoomType"), new { @class = "form-control" })
 
 
         @Html.LabelFor(item => item.BookingStatusId)
         @Html.DropDownListFor(item => item.BookingStatusId, new SelectList(Model.BookStatusList, "BookingStatusId", "Status"), new { @class = "form-control" })
 
-        <div class="form-group">
-            @Html.LabelFor(item => item.RoomImage)
-            <input type="file" class="form-control" name="UploadedImage" id="UploadedImage" onchange="previewFile(this)" />
-        </div>
+<div class="form-group">
+    @Html.LabelFor(item => item.RoomImage)
+    <input type="file" class="form-control" name="UploadedImage" id="UploadedImage" onchange="previewFile(this)" @ViewBag.required />
+    @Html.ValidationMessageFor(item => item.UploadedImage, "", new { @class = "text-danger" })
+</div>
         <div>
             @if (Model.RoomImage != null)
             {
@@ -56,20 +66,22 @@
             }
             else
             {
-                <img class="img img-responsive " src="" id="previewImg" style="height:105px" aria-hidden="true" />
+                <img class="img img-rounded " src="" id="previewImg" style="height:105px" aria-hidden="true" />
             }
         </div>
 
-           
+
         <div class="form-group">
             @Html.LabelFor(item => item.RoomCapacity)
             @Html.TextBoxFor(item => item.RoomCapacity, new { @class = "form-control" })
+            @Html.ValidationMessageFor(item => item.RoomCapacity, "", new { @class = "text-danger" })
         </div>
         <div class="form-group">
             @Html.LabelFor(item => item.RoomDescription)
             @Html.TextAreaFor(item => item.RoomDescription, new { @class = "form-control" })
+            @Html.ValidationMessageFor(item => item.RoomDescription, "", new { @class = "text-danger" })
         </div>
-        <input type="submit" class="btn btn-success" onclick="update()" value="Add Room" />
+        <input type="submit" class="btn btn-success" onclick="update()" value="@ViewBag.Title" />
 
 
     }

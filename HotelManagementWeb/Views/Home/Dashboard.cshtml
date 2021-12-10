@@ -8,7 +8,20 @@
 
 <a class="btn btn-danger" href="@Url.Action("AddRoom")">Add Room</a>
 
+@*<style>
+    .box {
+        border-radius: 5px;
+        box-shadow: 0px 30px 40px -20px hsl(229, 6%, 66%);
+        
+        padding: 30px;
+        margin: 20px; 
+    }
 
+    .red {
+        
+        ;
+    }
+</style>*@
 
 <table class="table table-bordered" style="margin-top:20px">
     <tr>
@@ -34,7 +47,7 @@
             <td>@data.RoomDescription</td>
             <td>@data.RoomPrice</td>
             <td>
-                <a class="btn btn-primary btn-sm" style="margin-right:5px" href="@Url.Action("AddRoom", data)">Edit</a>
+                <a class="btn btn-primary btn-sm" style="margin-right:5px" href="@Url.Action("EditRoom", data)">Edit</a>
                 <a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#@data.RoomId">Delete</a>
             </td>
 
@@ -42,5 +55,7 @@
 
         </tr>
 
+
 }
 </table>
+

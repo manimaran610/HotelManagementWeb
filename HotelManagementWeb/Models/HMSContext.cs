@@ -32,9 +32,7 @@ namespace HotelManagementSystem.Models
                 .Property(e => e.PaymentType1)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<Room>()
-                .Property(e => e.RoomNumber)
-                .IsUnicode(false);
+            
         }
     }
 }

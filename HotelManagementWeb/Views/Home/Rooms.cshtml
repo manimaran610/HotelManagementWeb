@@ -1,0 +1,10 @@
+﻿@model IEnumerable<HotelManagementWeb.Models.Room>
+@{
+    ViewBag.Title = "Rooms";
+}
+
+<h2>Rooms</h2>
+@foreach (var item in Model) {
+    @Html.Partial("RoomCard", item)
+}
+

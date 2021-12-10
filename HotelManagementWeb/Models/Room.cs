@@ -11,25 +11,28 @@ namespace HotelManagementWeb.Models
     {
         public int RoomId { get; set; }
 
-        [Required]
-        [StringLength(5)]
+        [Required] 
         [Display(Name = "Room Number")]
-        public string RoomNumber { get; set; }
+        
+        public int? RoomNumber { get; set; }
 
         [Display(Name = "Image")]
-        public string RoomImage { get; set; }
 
+        public string RoomImage { get; set; }
+        
         [Display(Name = "Price")]
-        public decimal RoomPrice { get; set; }
+        [Required]
+        public decimal? RoomPrice { get; set; }
 
         [Display(Name = "Booking Status")]
         public int BookingStatusId { get; set; }
 
         [Display(Name = "Type")]
         public int RoomTypeId { get; set; }
-
+        [Required]
         [Display(Name = "Capacity")]
-        public int RoomCapacity { get; set; }
+       
+        public int? RoomCapacity { get; set; }
 
         [Required]
         [StringLength(550)]
@@ -41,6 +44,7 @@ namespace HotelManagementWeb.Models
 
 
         [NotMapped]
+      
         public HttpPostedFileBase UploadedImage { get; set; }
 
         [NotMapped]
