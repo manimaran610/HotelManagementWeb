@@ -1,9 +1,8 @@
 ﻿@model HotelManagementWeb.Models.Room
 @{
-    
+
     Html.EnableClientValidation(true);
     Layout = "~/Views/Shared/_Layout.cshtml";
-
 }
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -29,14 +28,15 @@
 </style>
 <h2>@ViewBag.Title</h2>
 <div>
-    @using (Html.BeginForm("AddRoomPost", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    @using (Html.BeginForm(Model.PostAction, "DashBoard", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+       
         <div class="form-group ">
             @Html.LabelFor(item => item.RoomNumber)
             @Html.TextBoxFor(item => item.RoomNumber, new { @class = "form-control" })
-            @Html.ValidationMessageFor(item => item.RoomNumber, "", new { @class = "text-danger" })
+            <p class="text-danger"></p>
+            @Html.ValidationMessageFor(item => item.RoomNumber,"",new { @class = "text-danger" })
         </div>
         <div class="form-group">
             @Html.LabelFor(item => item.RoomPrice)

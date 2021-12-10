@@ -62,7 +62,12 @@ namespace HotelManagementWeb.Models
         public string Type { get; set; }
 
 
+        [NotMapped]
 
+        public string ErrorMessage { get; set; }
+        
+        [NotMapped]
+        public string PostAction { get; set; }
     }
 }
 

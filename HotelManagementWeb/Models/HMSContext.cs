@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Linq;
 
-namespace HotelManagementSystem.Models
+namespace HotelManagementWeb.Models
 {
     public partial class HMSContext : DbContext
     {

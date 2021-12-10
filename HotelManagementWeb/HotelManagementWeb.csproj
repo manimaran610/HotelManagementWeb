@@ -171,6 +171,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -245,10 +246,10 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Home\AddOrUpdateRoom.cshtml" />
-    <Content Include="Views\Home\AddRoomPost.cshtml" />
-    <Content Include="Views\Home\ConfirmDelete.cshtml" />
-    <Content Include="Views\Home\Dashboard.cshtml" />
+    <Content Include="Views\Dashboard\AddOrUpdateRoom.cshtml" />
+    <Content Include="Views\Dashboard\AddRoomPost.cshtml" />
+    <Content Include="Views\Dashboard\ConfirmDelete.cshtml" />
+    <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\Home\RoomCard.cshtml" />
     <Content Include="Views\Home\Rooms.cshtml" />
   </ItemGroup>
