@@ -14,22 +14,41 @@ namespace HotelManagementWeb.Models
 
         [Required]
         [StringLength(50)]
+        [Display(Name = "Name")]
         public string CustomerName { get; set; }
 
         [Column(TypeName = "date")]
+        [DataType(DataType.Date)]
+      
         public DateTime BookingFrom { get; set; }
 
         [Column(TypeName = "date")]
+        [DataType(DataType.Date)]
         public DateTime BookingTo { get; set; }
 
         public int AssignRoomId { get; set; }
 
-        public int NoOfMembers { get; set; }
+        [Display(Name ="No. of persons")]
+        
+        public int? NoOfMembers { get; set; }
 
-        [Required]
-        [StringLength(550)]
-        public string CustomerAddress { get; set; }
+       
+       
 
-        public decimal TotalAmount { get; set; }
+        public decimal? TotalAmount { get; set; }
+
+        [NotMapped]
+        public decimal? RoomPrice { get; set; }
+        [NotMapped]
+        public decimal NumberOfDays { get; set; }
+        [NotMapped]
+        public decimal? ValueAddedTax { get; set; }
+        [NotMapped]
+        public decimal? Phone { get; set; }
+
+        [NotMapped]
+        public int? MaxCapacity { get; set; }
+
+
     }
 }

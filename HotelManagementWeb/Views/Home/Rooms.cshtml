@@ -4,7 +4,13 @@
 }
 
 <h2>Rooms</h2>
-@foreach (var item in Model) {
-    @Html.Partial("RoomCard", item)
-}
+<div class="container">
+    @foreach (var item in Model)
+    {
+        //item.CheckInOutDate.CheckIn = (DateTime)ViewData["CheckIn"];
+        //item.CheckInOutDate.CheckOut = (DateTime)ViewData["CheckOut"];
 
+        @Html.Partial("RoomCard", item)
+    }
+
+</div>

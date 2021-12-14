@@ -152,7 +152,12 @@ namespace HotelManagementWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                if(DateTime.Now.Year-model.DateOfBirth.Year < 18 || DateTime.Now.Year-model.DateOfBirth.Year > 80)
+                {
+                   ViewData["DateOfBirth"]= "Your age must be greater than 18 and less than 80";
+                    return View("Register");
+                }
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email,FullName=model.Name,PhoneNumber=model.Phone.ToString()};
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

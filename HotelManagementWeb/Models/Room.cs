@@ -65,9 +65,12 @@ namespace HotelManagementWeb.Models
         [NotMapped]
 
         public string ErrorMessage { get; set; }
-        
+
         [NotMapped]
-        public string PostAction { get; set; }
+        public DateTime CheckIn { get; set; }
+
+        [NotMapped]
+        public DateTime CheckOut { get; set; }
     }
 }
 

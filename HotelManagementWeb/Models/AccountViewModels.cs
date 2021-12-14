@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace HotelManagementWeb.Models
@@ -64,10 +65,30 @@ namespace HotelManagementWeb.Models
 
     public class RegisterViewModel
     {
+
+        [Required]
+        [DataType(DataType.Text)]
+        [MinLength(4,ErrorMessage ="Name is too short")]
+        [MaxLength(16,ErrorMessage ="Name is too long")]
+        [RegularExpression("^(?!.*([ ])\\1)(?!.*([A-Za-z])\\2{2})\\w[a-zA-Z ]*$", ErrorMessage = "Name should not contain special characters or numerical digits")]
+       
+        public string Name { get; set; }
+
+        [Required]
+        
+        public DateTime DateOfBirth { get; set; }
+
+        [Required]
+        [DataType(DataType.PhoneNumber)]
+        [RegularExpression("[6-9][0-9]{9}",ErrorMessage ="Mobile Number is Invalid")]
+        public Decimal? Phone { get; set; }
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
+
+       
+      
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]

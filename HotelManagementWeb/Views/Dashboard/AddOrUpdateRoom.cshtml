@@ -28,7 +28,7 @@
 </style>
 <h2>@ViewBag.Title</h2>
 <div>
-    @using (Html.BeginForm(Model.PostAction, "DashBoard", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    @using (Html.BeginForm((string)ViewData["PostAction"], "DashBoard", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
        

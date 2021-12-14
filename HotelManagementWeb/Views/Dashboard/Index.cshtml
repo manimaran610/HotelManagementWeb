@@ -39,6 +39,7 @@
     {
         <tr>
           
+           
             <td>@data.RoomNumber</td>
             <td><img src="~/RoomImages/@data.RoomImage" height="30px" width="40px"></td>
             <td>@data.Type</td>
@@ -47,12 +48,13 @@
             <td>@data.RoomDescription</td>
             <td>@data.RoomPrice</td>
             <td>
-                <a class="btn btn-primary btn-sm" style="margin-right:5px" href="@Url.Action("EditRoom", data)">Edit</a>
+                <a class="btn btn-primary btn-sm" style="margin-right:5px"  href="@Url.Action("EditRoom", data)">Edit</a>
                 <a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#@data.RoomId">Delete</a>
             </td>
 
             @{Html.RenderPartial("ConfirmDelete", data);}
 
+           
         </tr>
 
 

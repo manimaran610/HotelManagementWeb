@@ -43,7 +43,7 @@ namespace HotelManagementWeb.Controllers
         public ActionResult AddRoom(Room model)
         {
             ViewBag.Title = "Add Room";
-            model.PostAction = "AddRoomPost";
+            ViewData["PostAction"] = "AddRoomPost";
             ViewBag.required = "required";
             using (var database = new HMSContext())
             {
@@ -63,7 +63,7 @@ namespace HotelManagementWeb.Controllers
                 model.RoomTypeList = database.RoomTypes.ToList();
                 model.BookStatusList = database.BookingStatus.ToList();
                 ViewBag.Title = "Update Room";
-                model.PostAction = "UpdateRoomPost";
+                ViewData["PostAction"] = "UpdateRoomPost";
                 if (model.ErrorMessage != null) ModelState.AddModelError("RoomNumber", model.ErrorMessage);
                 return PartialView("AddOrUpdateRoom", model);
             }
