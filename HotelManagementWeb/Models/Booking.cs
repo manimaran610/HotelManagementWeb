@@ -49,6 +49,9 @@ namespace HotelManagementWeb.Models
         [NotMapped]
         public int? MaxCapacity { get; set; }
 
+        [NotMapped]
+        public int? RoomNumber { get; set; }
+
 
     }
 }

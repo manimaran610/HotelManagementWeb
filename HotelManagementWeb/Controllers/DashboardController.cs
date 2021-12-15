@@ -10,21 +10,20 @@ using System.Web.Mvc;
 
 namespace HotelManagementWeb.Controllers
 {
-  
+
     [Route("{action=index}")]
-   
+
     public class DashboardController : Controller
     {
         // GET: Dashboard
         private Random randomnumber = new Random();
-       
-        
+
+      
+
         public ActionResult Index()
-            
         {
-            
             using (var database = new HMSContext())
-            {         
+            {
                 List<Room> ListOfRooms = database.Rooms.ToList();
                 foreach (var data in ListOfRooms)
                 {
@@ -37,8 +36,48 @@ namespace HotelManagementWeb.Controllers
             }
         }
 
-      
 
+        public ActionResult Bookings()
+        {
+            using (var database = new HMSContext())
+            {
+                var ListOfBookings = database.Bookings.ToList();
+
+                foreach(var item in ListOfBookings)
+                {
+                    if(item.BookingTo.Date < DateTime.Now.Date)
+                    {
+                        var ExpiredBookings = database.Bookings.Where(bookings => bookings.BookingId==item.BookingId).First();
+                        database.Bookings.Remove(ExpiredBookings);
+                        database.SaveChanges();
+                    }
+                    item.RoomNumber = database.Rooms.ToList().Find(room => room.RoomId == item.AssignRoomId).RoomNumber;
+                }
+                return View(ListOfBookings);
+            }
+        }
+
+
+        public ActionResult Users()
+        {
+            using (var database = new ApplicationDbContext())
+            {
+                return View(database.Users.ToList());
+            }
+        }
+
+        public ActionResult DeleteUser(string Id)
+        {
+            if (Id == null) return View("Error");
+            using (var database = new ApplicationDbContext())
+            {
+                var User = database.Users.Where(user => user.Id == Id).First();
+                database.Users.Remove(User);
+                database.SaveChanges();
+
+                return RedirectToAction("Users");
+            }
+        }
         [HttpGet]
         public ActionResult AddRoom(Room model)
         {
@@ -90,7 +129,7 @@ namespace HotelManagementWeb.Controllers
                     model.IsActive = true;
                     database.Rooms.Add(model);
                     database.SaveChanges();
-                    return View(model);
+                    return RedirectToAction("index");
                 }
                 else
                 {
@@ -120,7 +159,7 @@ namespace HotelManagementWeb.Controllers
                     }
                     database.Rooms.AddOrUpdate(model);
                     database.SaveChanges();
-                    return View("AddRoomPost", model);
+                    return RedirectToAction("index");
                 }
                 else
                 {

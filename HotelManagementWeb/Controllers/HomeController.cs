@@ -78,8 +78,10 @@ namespace HotelManagementWeb.Controllers
 
 
       
-        public ActionResult BookingRoom(Room room)
+        public ActionResult BookingRoom(Room room=null)
+
         {
+            if (room.RoomId == 0) return View("Error");
             var db = new ApplicationDbContext();
            var data = db.Users.Where(item => item.Email == User.Identity.Name).First();
 
@@ -116,7 +118,8 @@ namespace HotelManagementWeb.Controllers
             return View();
 
         }
-
+        
 
     }
+
 }
