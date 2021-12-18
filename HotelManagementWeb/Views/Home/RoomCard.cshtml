@@ -1,18 +1,24 @@
 ﻿@model HotelManagementWeb.Models.Room
 
+
 <style>
     .onhover:hover {
         box-shadow: 0px 30px 40px -20px hsl(229, 6%, 66%);
+        transform: scale(1.1);
+        z-index:1;
     }
-    
+    .onhover {
+        transition: all .2s ease-in-out;    
+    }
+ 
 
 
 </style>
 
-    <div class="col-md-4 font-sans " style="margin-top:30px">
+    <div class="col-md-4 font-sans col-sm-auto cols-md-6 " style="margin-top:30px">
         <div class="flex">
             <div class="max-w-md md:max-w-2xl px-2 onhover" >
-                <div class="bg-white shadow-xl rounded-lg overflow-hidden md:flex  onSmallDevice" style="border-bottom: 3px solid rgb(48, 63, 159); height: 200px; width: 360px ">
+                <div class="bg-white shadow-xl rounded-lg overflow-hidden md:flex  onSmallDevice" style="border-bottom: 3px solid rgb(48, 63, 159); min-height: 200px; min-width: 360px ">
                    <div class="bg-cover bg-bottom h-56 md:h-auto md:w-56 onSmallImage" style="background-image: url(/RoomImages/@Model.RoomImage)">
                     </div>
                     <div>
@@ -28,8 +34,8 @@
 
                                     </div>
                                 </div>
-                                <a href="@Url.Action("BookingRoom",Model)">
-                                    <button class="mt-3 sm:mt-0 py-2 px-5 md:py-3 md:px-6 bg-indigo-700 hover:bg-indigo-600 font-bold text-white md:text-lg rounded-lg shadow-md" style="height:35px" >Book now</button>
+                                <a href="@Url.Action("BookingRoom",Model)" >
+                                    <button class="mt-3 bg-w sm:mt-0 py-2 px-5 md:py-3 md:px-6 bg-indigo-700 hover:bg-indigo-600 font-bold text-white md:text-lg rounded-lg shadow-md" style="height:35px" >Book now</button>
                                 </a></div>
                             <div class="mt-3 text-gray-600 text-sm md:text-base">*Prices may vary depending on selected date.</div>
                         </div>

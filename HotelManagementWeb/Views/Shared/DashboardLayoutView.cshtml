@@ -29,8 +29,8 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    @*<li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
                     <li>@Html.ActionLink("Dashboard", "Index", "Dashboard")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
@@ -40,9 +40,9 @@
     <div class="container-fluid">
 
         <div class="list-group  col-md-2 col-sm-auto col-lg-2">
-            <h2 class="text-center">Dashboard</h2><hr />
+            <h2 class="text-center" style="font-weight:bold">Dashboard</h2><hr />
             <a class="list-group-item list-group-item-action list-group-item-light p-3" href="@Url.Action("Index","Dashboard")">Manage Rooms</a>
-            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="@Url.Action("Bookings","Dashboard")">Bookings</a>
+            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="@Url.Action("Bookings","Dashboard",new {id=0 })">Bookings</a>
             <a class="list-group-item list-group-item-action list-group-item-light p-3" href="@Url.Action("Users","Dashboard")">Users</a>
 
         </div>

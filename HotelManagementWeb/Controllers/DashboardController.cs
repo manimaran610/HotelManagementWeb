@@ -18,7 +18,7 @@ namespace HotelManagementWeb.Controllers
         // GET: Dashboard
         private Random randomnumber = new Random();
 
-      
+
 
         public ActionResult Index()
         {
@@ -27,6 +27,8 @@ namespace HotelManagementWeb.Controllers
                 List<Room> ListOfRooms = database.Rooms.ToList();
                 foreach (var data in ListOfRooms)
                 {
+                   //var ExistingBookings= database.Bookings.Where(item => item.AssignRoomId == data.RoomId).First();
+                    //if(ExistingBookings.BookingFrom.Date <= DateTime.Now.Date && ExistingBookings.BookingTo.Date >= DateTime.Now.Date)
                     data.Type = database.RoomTypes.ToList().Find(option => option.RoomTypeId == data.RoomTypeId).RoomType;
                     data.Status = database.BookingStatus.ToList().Find(option => option.BookingStatusId == data.BookingStatusId).Status;
                     var model = ListOfRooms.Find(item => item.RoomId == data.RoomId);
@@ -37,22 +39,28 @@ namespace HotelManagementWeb.Controllers
         }
 
 
-        public ActionResult Bookings()
+        public ActionResult Bookings(int? id)
         {
             using (var database = new HMSContext())
             {
-                var ListOfBookings = database.Bookings.ToList();
-
-                foreach(var item in ListOfBookings)
+                List<Booking> ListOfBookings = database.Bookings.ToList();
+                decimal? TotalAmountReceived = new decimal();
+                foreach (var item in database.Bookings.ToList())
                 {
-                    if(item.BookingTo.Date < DateTime.Now.Date)
+                    if (id == 1 && item.BookingTo.Date < DateTime.Now.Date)
                     {
-                        var ExpiredBookings = database.Bookings.Where(bookings => bookings.BookingId==item.BookingId).First();
+                        ListOfBookings.Remove(item);
+                    }
+                    if (id == 2 && item.BookingTo.Date < DateTime.Now.Date)
+                    {
+                        var ExpiredBookings = database.Bookings.Where(bookings => bookings.BookingId == item.BookingId).First();
                         database.Bookings.Remove(ExpiredBookings);
                         database.SaveChanges();
                     }
                     item.RoomNumber = database.Rooms.ToList().Find(room => room.RoomId == item.AssignRoomId).RoomNumber;
+                    TotalAmountReceived += item.TotalAmount;
                 }
+                ViewBag.TotalAmountReceived = TotalAmountReceived;
                 return View(ListOfBookings);
             }
         }
@@ -68,7 +76,7 @@ namespace HotelManagementWeb.Controllers
 
         public ActionResult DeleteUser(string Id)
         {
-            if (Id == null) return View("Error");
+            if (Id == null) return new HttpNotFoundResult();
             using (var database = new ApplicationDbContext())
             {
                 var User = database.Users.Where(user => user.Id == Id).First();

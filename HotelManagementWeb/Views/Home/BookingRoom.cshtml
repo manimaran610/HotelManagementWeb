@@ -2,11 +2,12 @@
 
 @{
     ViewBag.Title = "BookingRoom";
+    Html.EnableClientValidation(true);
 }
 
 <h2>BookingRoom</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("BookingRoom","Home",FormMethod.Post)) 
 {
     @Html.AntiForgeryToken()
     
@@ -17,7 +18,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.CustomerName, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.CustomerName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(model => model.CustomerName, new { htmlAttributes = new { @class = "form-control text-capitalize" } })
             @Html.ValidationMessageFor(model => model.CustomerName, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -39,16 +40,24 @@
     </div>
 
     <div class="form-group">
-
+        @Html.HiddenFor(model => model.CustomerEmail)
         @Html.HiddenFor(model => model.AssignRoomId)
-       @Html.HiddenFor(model => model.MaxCapacity)
+        @Html.HiddenFor(model => model.MaxCapacity)
+        @Html.HiddenFor(model => model.TotalAmount)
     </div>
 
     <div class="form-group">
         @Html.LabelFor(model => model.NoOfMembers, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.NoOfMembers, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.NoOfMembers, "", new { @class = "text-danger" })
+            @Html.ValidationMessageFor(model => model.NoOfMembers, (string)ViewData["NoOfMembers"], new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
         </div>
     </div>
 
@@ -67,14 +76,14 @@
                 <span class="text-danger">₹@Model.TotalAmount</span>
             </h4>
         </div>
-        </div>
-       
-        <div class="form-group pull-right">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Pay Now" class="btn btn-info" />
-            </div>
+    </div>
+
+    <div class="form-group pull-right">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Pay Now" class="btn btn-info" />
         </div>
     </div>
+</div>
     }
 
     <div>

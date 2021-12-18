@@ -9,7 +9,7 @@ namespace HotelManagementWeb.Models
     [Table("Booking")]
     public partial class Booking
     {
-        
+        [Key]
         public int BookingId { get; set; }
 
         [Required]
@@ -29,11 +29,11 @@ namespace HotelManagementWeb.Models
         public int AssignRoomId { get; set; }
 
         [Display(Name ="No. of persons")]
-        
+        [Required]
         public int? NoOfMembers { get; set; }
 
-       
-       
+        public string CustomerEmail { get; set; }
+
 
         public decimal? TotalAmount { get; set; }
 
@@ -44,6 +44,9 @@ namespace HotelManagementWeb.Models
         [NotMapped]
         public decimal? ValueAddedTax { get; set; }
         [NotMapped]
+        [Required]
+        [DataType(DataType.PhoneNumber)]
+        [RegularExpression("[6-9][0-9]{9}", ErrorMessage = "Mobile Number is Invalid")]
         public decimal? Phone { get; set; }
 
         [NotMapped]

@@ -87,6 +87,7 @@ namespace HotelManagementWeb.Controllers
 
             var model = new Booking();
             model.CustomerName = data.FullName;
+            model.CustomerEmail = data.Email;
             model.AssignRoomId = room.RoomId;
             model.NoOfMembers = room.RoomCapacity;
             model.BookingFrom =  room.CheckIn;
@@ -94,13 +95,13 @@ namespace HotelManagementWeb.Controllers
             model.NumberOfDays = (room.CheckOut - room.CheckIn).Days;
             model.RoomPrice = room.RoomPrice;
             model.MaxCapacity= room.RoomCapacity;
-            model.Phone = Decimal.Parse(data.PhoneNumber);
+            model.Phone = Decimal.Round(Decimal.Parse(data.PhoneNumber));
             model.ValueAddedTax= Decimal.Round(Decimal.Multiply((Decimal)room.RoomPrice, (Decimal)0.18));
             model.TotalAmount = model.RoomPrice + model.ValueAddedTax;
 
             model.TotalAmount= Decimal.Multiply((Decimal)model.TotalAmount, model.NumberOfDays);
            
-            return View(model);
+           return View(model);
         }
 
         [HttpPost]
@@ -108,17 +109,37 @@ namespace HotelManagementWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (model.NoOfMembers > model.MaxCapacity) {
-                    ModelState.AddModelError("NoOfMembers", "Maximum capacity is upto " + model.MaxCapacity + "  persons");
-                 return View(model);
+                if (model.NoOfMembers > model.MaxCapacity)
+                {
+                    ViewData["NoOfMembers"] = "Maximum capacity is upto " + model.MaxCapacity + "  person";
+                    return View(model);
                 }
-
-
+                using(var database = new HMSContext())
+                {
+                    database.Bookings.Add(model);
+                    
+                    database.SaveChanges();
+                }
+                return PartialView("BookedScreen");
             }
-            return View();
-
+            return RedirectToAction("BookingRoom",model);
         }
         
+        public ActionResult UserBookings()
+        {
+            using(var database=new HMSContext())
+            {
+               var BookedList =  database.Bookings.ToList().FindAll(item => item.CustomerEmail == User.Identity.Name);
+                foreach(var item in BookedList)
+                {
+                    item.RoomNumber = database.Rooms.ToList().Find(room => room.RoomId == item.AssignRoomId).RoomNumber;
+                }
+                if (BookedList.Count == 0) ViewBag.NoBookings = "There are no record of bookings from you";
+                return View(BookedList);
+
+            }
+        }
+      
 
     }
 
