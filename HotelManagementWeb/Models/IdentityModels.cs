@@ -12,6 +12,8 @@ namespace HotelManagementWeb.Models
     {
         public string FullName { get; set; }
         public DateTime DateOfBirth { get; set; }
+
+        public string Gender { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType

@@ -9,6 +9,7 @@
  
     <link rel="stylesheet" href="~/Content/font-awesome.min.css">
 
+
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -30,7 +31,10 @@
                     <li>@Html.ActionLink("Bookings", "UserBookings", "Home")</li>
                     @*<li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
+                    @if (User.IsInRole("Admin"))
+                    {
                     <li>@Html.ActionLink("Dashboard", "Index", "Dashboard")</li>
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

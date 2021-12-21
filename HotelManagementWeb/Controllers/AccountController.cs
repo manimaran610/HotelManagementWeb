@@ -73,6 +73,19 @@ namespace HotelManagementWeb.Controllers
             {
                 return View(model);
             }
+            bool IsValidUser;
+            using (var database = new ApplicationDbContext())
+            {
+                var ExistingUsers = database.Users.ToList();
+                IsValidUser = ExistingUsers.Exists(user => user.Email == model.Email);
+               
+
+            }
+            if (!IsValidUser)
+            {
+                ModelState.AddModelError("", "Email doesn't exists please register your email before login ");
+                return View(model);
+            }
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
@@ -87,7 +100,7 @@ namespace HotelManagementWeb.Controllers
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 case SignInStatus.Failure:
                 default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
+                    ModelState.AddModelError("", "Password is Invalid, Please check your password before login");
                     return View(model);
             }
         }
@@ -152,12 +165,12 @@ namespace HotelManagementWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                if(DateTime.Now.Year-model.DateOfBirth.Year < 18 || DateTime.Now.Year-model.DateOfBirth.Year > 80)
+                if (Decimal.Subtract( DateTime.Now.Year , model.DateOfBirth.Year) < 18 || Decimal.Subtract(DateTime.Now.Year , model.DateOfBirth.Year) > 80)
                 {
-                   ViewData["DateOfBirth"]= "Your age must be greater than 18 and less than 80";
+                    ViewData["DateOfBirth"] = "Your age must be greater than 18 and less than 80";
                     return View("Register");
                 }
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email,FullName=model.Name,PhoneNumber=model.Phone.ToString()};
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email,FullName=model.Name,PhoneNumber=model.Phone.ToString(),DateOfBirth=model.DateOfBirth,Gender=model.Gender};
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

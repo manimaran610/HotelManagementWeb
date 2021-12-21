@@ -185,6 +185,10 @@
     <Compile Include="Migrations\202112150711175_addDob.Designer.cs">
       <DependentUpon>202112150711175_addDob.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202112210320475_GenderUpdate.cs" />
+    <Compile Include="Migrations\202112210320475_GenderUpdate.Designer.cs">
+      <DependentUpon>202112210320475_GenderUpdate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Booking.cs" />
@@ -205,6 +209,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\tailwind.output.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -273,6 +278,7 @@
     <Content Include="Views\Dashboard\Users.cshtml" />
     <Content Include="Views\Home\BookedScreen.cshtml" />
     <Content Include="Views\Home\UserBookings.cshtml" />
+    <Content Include="Views\Home\SampleView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -296,6 +302,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202112150711175_addDob.resx">
       <DependentUpon>202112150711175_addDob.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202112210320475_GenderUpdate.resx">
+      <DependentUpon>202112210320475_GenderUpdate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

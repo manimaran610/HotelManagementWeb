@@ -83,6 +83,9 @@ namespace HotelManagementWeb.Models
         [RegularExpression("[6-9][0-9]{9}",ErrorMessage ="Mobile Number is Invalid")]
         public Decimal? Phone { get; set; }
         [Required]
+        public string Gender { get; set; }
+     
+        [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
