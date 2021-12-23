@@ -13,7 +13,7 @@ namespace HotelManagementWeb.Models
         {
         }
 
-        public virtual DbSet<Booking> Bookings { get; set; }
+        public virtual  DbSet<Booking> Bookings { get; set; }
         public virtual DbSet<Payment> Payments { get; set; }
         public virtual DbSet<PaymentType> PaymentTypes { get; set; }
         public virtual DbSet<Room> Rooms { get; set; }

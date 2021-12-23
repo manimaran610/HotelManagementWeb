@@ -23,7 +23,7 @@
 
 
 
-        <div class="flex  items-center min-h-screen p-6 bg-gray-50 ">
+        <div class="flex  items-center min-h-screen p-6 bg-gray-100 ">
             <div class="flex-1  h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl ">
                 <div class="flex  flex-col overflow-y-auto md:flex-row">
                     <div class="h-32 md:h-auto md:w-1/2">
@@ -42,14 +42,14 @@
                                 <span class="text-gray-700">
                                     @Html.LabelFor(m => m.Name)
                                 </span>
-                                @Html.TextBoxFor(m => m.Name, new { @class = " block w-full mt-1 text-sm focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input", @style = "text-transform:capitalize " })
+                                @Html.TextBoxFor(m => m.Name, new { @class = " block w-full mt-1 text-sm focus:border-purple-400 focus:outline-none focus:shadow-outline-purple  form-input", @style = "text-transform:capitalize " })
                                 @Html.ValidationMessageFor(item => item.Name, "", new { @class = "text-red-600" })
                             </label>
                             <label class="block text-sm mb-4">
                                 <span class="text-gray-700">
                                     @Html.LabelFor(m => m.DateOfBirth)
                                 </span>
-                                @Html.TextBoxFor(m => m.DateOfBirth, new { @class = " block w-full mt-1 text-sm focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input", @type = "date" })
+                                @Html.TextBoxFor(m => m.DateOfBirth, new { @class = " block w-full mt-1 text-sm focus:border-purple-400 focus:outline-none focus:shadow-outline-purple  form-input", @type = "date" })
                                 @Html.ValidationMessageFor(item => item.DateOfBirth, (string)ViewData["DateOfBirth"], new { @class = "text-red-600" })
                             </label>
                             <label class="block text-sm mb-4">
@@ -60,35 +60,35 @@
     {
      new SelectListItem{ Text="Male", Value = "Male" },
      new SelectListItem{ Text="Female", Value = "Female" },
-          new SelectListItem{ Text="others", Value = "others" }}, "Select Gender", new { @class = " block w-full mt-1 text-sm focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input", @style = "text-transform:capitalize " })
+          new SelectListItem{ Text="others", Value = "others" }}, "Select Gender", new { @class = " block w-full mt-1 text-sm focus:border-purple-400 focus:outline-none focus:shadow-outline-purple  form-input", @style = "text-transform:capitalize " })
                                 @Html.ValidationMessageFor(item => item.Gender, "", new { @class = "text-red-600" })
                             </label>
                             <label class="block text-sm mb-4">
                                 <span class="text-gray-700">
                                     @Html.LabelFor(m => m.Phone)
                                 </span>
-                                @Html.TextBoxFor(m => m.Phone, new { @class = " block w-full mt-1 text-sm focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input", @style = "text-transform:capitalize " })
+                                @Html.TextBoxFor(m => m.Phone, new { @class = " block w-full mt-1 text-sm focus:border-purple-400 focus:outline-none focus:shadow-outline-purple  form-input", @style = "text-transform:capitalize " })
                                 @Html.ValidationMessageFor(item => item.Phone, "", new { @class = "text-red-600" })
                             </label>
                             <label class="block text-sm mb-4">
                                 <span class="text-gray-700">
                                     @Html.LabelFor(m => m.Email)
                                 </span>
-                                @Html.TextBoxFor(m => m.Email, new { @class = " block w-full mt-1 text-sm focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input", @style = "text-transform:capitalize " })
+                                @Html.TextBoxFor(m => m.Email, new { @class = " block w-full mt-1 text-sm focus:border-purple-400 focus:outline-none focus:shadow-outline-purple   form-input", @style = "text-transform:capitalize " })
                                 @Html.ValidationMessageFor(item => item.Email, "", new { @class = "text-red-600" })
                             </label>
                             <label class="block text-sm mb-4">
                                 <span class="text-gray-700">
                                     @Html.LabelFor(m => m.Password)
                                 </span>
-                                @Html.TextBoxFor(m => m.Password, new { @class = " block w-full mt-1 text-sm focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input" })
+                                @Html.TextBoxFor(m => m.Password, new { @class = " block w-full mt-1 text-sm focus:border-purple-400 focus:outline-none focus:shadow-outline-purple   form-input", @type = "password" })
                                 @Html.ValidationMessageFor(item => item.Password, "", new { @class = "text-red-600" })
                             </label>
                             <label class="block text-sm mb-4">
                                 <span class="text-gray-700">
                                     @Html.LabelFor(m => m.ConfirmPassword)
                                 </span>
-                                @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = " block w-full mt-1 text-sm focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input", })
+                                @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = " block w-full mt-1 text-sm focus:border-purple-400 focus:outline-none focus:shadow-outline-purple   form-input", @type = "password" })
                                 @Html.ValidationMessageFor(item => item.ConfirmPassword, "", new { @class = "text-red-600" })
                             </label>
 
@@ -134,68 +134,4 @@
     </body>
 
 
-    @*<h4>Create a new account.</h4>
-            <hr />
-
-            <div class="form-group">
-                @Html.LabelFor(m => m.Name, new { @class = "col-md-2 control-label" })
-                <div class="col-md-10">
-                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @style = "text-transform:capitalize" })
-                    @Html.ValidationMessageFor(item => item.Name, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(m => m.DateOfBirth, new { @class = "col-md-2 control-label" })
-                <div class="col-md-10">
-                    @Html.TextBoxFor(m => m.DateOfBirth, new { @class = "form-control", @type = "date" })
-                    @Html.ValidationMessageFor(item => item.DateOfBirth, (string)ViewData["DateOfBirth"], new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(m => m.Gender, new { @class = "col-md-2 control-label" })
-                <div class="col-md-10">
-                    @Html.DropDownListFor(m => m.Gender, new List<SelectListItem>
-        {
-           new SelectListItem{ Text="Male", Value = "Male" },
-           new SelectListItem{ Text="Female", Value = "Female" },
-                new SelectListItem{ Text="others", Value = "others" }}, "Select Gender", new { @class = "form-control" })
-                    @Html.ValidationMessageFor(item => item.Gender, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(m => m.Phone, new { @class = "col-md-2 control-label" })
-                <div class="col-md-10">
-                    @Html.TextBoxFor(m => m.Phone, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(item => item.Phone, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-
-            <div class="form-group">
-                @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-                <div class="col-md-10">
-                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(item => item.Email, "", new { @class = "text-danger", @type = "email" })
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                <div class="col-md-10">
-                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(item => item.Password, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
-                <div class="col-md-10">
-                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(item => item.ConfirmPassword, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" class="btn btn-default" value="Register" />
-                </div>
-            </div>
-        }*@
-
+          

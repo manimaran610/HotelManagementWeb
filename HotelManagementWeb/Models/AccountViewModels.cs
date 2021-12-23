@@ -80,7 +80,7 @@ namespace HotelManagementWeb.Models
 
         [Required]
         [DataType(DataType.PhoneNumber)]
-        [RegularExpression("[6-9][0-9]{9}",ErrorMessage ="Mobile Number is Invalid")]
+        [RegularExpression("[6-9][0-9]{9}",ErrorMessage ="Should start with 6-9 followed by 9 numeric digits")]
         public Decimal? Phone { get; set; }
         [Required]
         public string Gender { get; set; }

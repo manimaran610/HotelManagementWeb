@@ -48,12 +48,13 @@
     { 
         <div class="col-md-4 mt-10">
             <div class="card card-1">
-                <h4 class="mt-2 mb-10 "  style="font-weight:bold">Room Number - @data.RoomNumber</h4>
+               
+                <h4 class="mt-2 mb-10 " style="font-weight:bold">Room Number - @data.RoomNumber </h4>
                 <h5> CheckIn:  @data.BookingFrom.ToShortDateString()</h5>
                 <h5>CheckOut:@data.BookingTo.ToShortDateString()</h5>
                 <h5>No.Of Persons : @data.NoOfMembers</h5>
                 <p style="font-weight:bold">OrderID :#@data.BookingId</p>
-                <h4 class="btn btn-success">Amount-Paid : @data.TotalAmount</h4>
+                <h4 class="btn bg-purple-600 text-white">Amount-Paid : @data.TotalAmount</h4>
             </div>
 
         </div>

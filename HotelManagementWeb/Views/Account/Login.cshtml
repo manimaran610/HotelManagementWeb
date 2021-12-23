@@ -19,9 +19,9 @@
     @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
     {
         @Html.AntiForgeryToken()
-        <div class="flex  items-center min-h-screen p-6 bg-gray-50 " >
+        <div class="flex  items-center min-h-screen p-6 bg-gray-100"  >
             <div class="flex-1  h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl ">
-                <div class="flex  flex-col overflow-y-auto md:flex-row">
+                <div class="flex  flex-col overflow-y-auto md:flex-row" style="min-height:500px">
                     <div class="h-32 md:h-auto md:w-1/2">
                         <img aria-hidden="true"
                              class="object-cover w-full h-full dark:hidden"
@@ -38,14 +38,14 @@
                                 <span class="text-gray-700">
                                     @Html.LabelFor(m => m.Email)
                                 </span>
-                                @Html.TextBoxFor(m => m.Email, new { @class = " block w-full mt-1 text-sm focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input", @style = "text-transform:capitalize " })
+                                @Html.TextBoxFor(m => m.Email, new { @class = " block w-full mt-1 text-sm focus:border-purple-400 focus:outline-none focus:shadow-outline-purple form-input", @style = "text-transform:capitalize " })
                                 @Html.ValidationMessageFor(item => item.Email, "", new { @class = "text-red-600" })
                             </label>
                             <label class="block text-sm mb-4">
                                 <span class="text-gray-700">
                                     @Html.LabelFor(m => m.Password)
                                 </span>
-                                @Html.TextBoxFor(m => m.Password, new { @class = " block w-full mt-1 text-sm focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input" })
+                                @Html.TextBoxFor(m => m.Password, new { @class = " block w-full mt-1 text-sm focus:border-purple-400 focus:outline-none focus:shadow-outline-purple  form-input" ,@type="password"})
                                 @Html.ValidationMessageFor(item => item.Password, (string)ViewData["DateOfBirth"], new { @class = "text-red-600" })
                             </label>
                             <div class="flex mt-6 text-sm">
@@ -72,7 +72,7 @@
                             <p class="mt-4">
                                 <a class="text-sm font-medium text-purple-600 hover:underline"
                                    href="@Url.Action("Register", "Account")">
-                                    Don't have an account ?Register here
+                                    Don't have an account?Register here
                                 </a>
                             </p>
 

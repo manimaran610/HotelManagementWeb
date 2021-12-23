@@ -6,7 +6,7 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.0.1/tailwind.min.css'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
- 
+  
     <link rel="stylesheet" href="~/Content/font-awesome.min.css">
 
 
@@ -29,11 +29,11 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("Bookings", "UserBookings", "Home")</li>
-                    @*<li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
+                    <li>@Html.ActionLink("About", "about", "home")</li>
+                    <li>@Html.ActionLink("Contact", "contact", "home")</li>
                     @if (User.IsInRole("Admin"))
                     {
-                    <li>@Html.ActionLink("Dashboard", "Index", "Dashboard")</li>
+                        <li>@Html.ActionLink("Dashboard", "Index", "Dashboard")</li>
                     }
                 </ul>
                 @Html.Partial("_LoginPartial")
@@ -45,7 +45,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p class="font-bold">&copy; @DateTime.Now.Year - Hotel Elite </p>
         </footer>
     </div>
     @Scripts.Render("~/bundles/jquery")

@@ -9,6 +9,8 @@ namespace HotelManagementWeb.Models
 {
     public class Room
     {
+
+        
         public int RoomId { get; set; }
 
         [Required] 
@@ -31,7 +33,7 @@ namespace HotelManagementWeb.Models
         public int RoomTypeId { get; set; }
         [Required]
         [Display(Name = "Capacity")]
-       
+       [RegularExpression("^[1-9]$|^[1-2]{1}[0-8]{1}$",ErrorMessage ="Range for Capacity is from 1 - 28")]
         public int? RoomCapacity { get; set; }
 
         [Required]

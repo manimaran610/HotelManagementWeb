@@ -2,9 +2,11 @@
 using HotelManagementWeb.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -27,11 +29,17 @@ namespace HotelManagementWeb.Controllers
                 using (var database = new HMSContext())
                 {
                     List<Room> ListOfRooms = database.Rooms.ToList();
+                    List<Booking> ListofBookings = database.Bookings.ToList();
                     foreach (var data in ListOfRooms)
                     {
-                        //var ExistingBookings= database.Bookings.Where(item => item.AssignRoomId == data.RoomId).First();
-                        //if(ExistingBookings.BookingFrom.Date <= DateTime.Now.Date && ExistingBookings.BookingTo.Date >= DateTime.Now.Date)
-                        data.Type = database.RoomTypes.ToList().Find(option => option.RoomTypeId == data.RoomTypeId).RoomType;
+                       //var ExistingBookings=ListofBookings.Find(item => item.AssignRoomId == data.RoomId);
+                       // if (ExistingBookings !=null && ExistingBookings.BookingFrom.Date <= DateTime.Now.Date && ExistingBookings.BookingTo.Date >= DateTime.Now.Date)
+                       // {
+                       //     data.Type = "Reserved";
+                       // }
+                     
+                            data.Type = database.RoomTypes.ToList().Find(option => option.RoomTypeId == data.RoomTypeId).RoomType;
+                        
                         data.Status = database.BookingStatus.ToList().Find(option => option.BookingStatusId == data.BookingStatusId).Status;
                         var model = ListOfRooms.Find(item => item.RoomId == data.RoomId);
                         model = data;
@@ -42,12 +50,12 @@ namespace HotelManagementWeb.Controllers
         }
 
 
-        public ActionResult Bookings(int? id)
+        public async Task<ActionResult> Bookings(int? id)
         {
             if (User.IsInRole("Admin"))
                 using (var database = new HMSContext())
                 {
-                    List<Booking> ListOfBookings = database.Bookings.ToList();
+                    var ListOfBookings = await database.Bookings.ToListAsync();
                     decimal? TotalAmountReceived = new decimal();
                     foreach (var item in database.Bookings.ToList())
                     {
@@ -59,7 +67,7 @@ namespace HotelManagementWeb.Controllers
                         {
                             var ExpiredBookings = database.Bookings.Where(bookings => bookings.BookingId == item.BookingId).First();
                             database.Bookings.Remove(ExpiredBookings);
-                            database.SaveChanges();
+                            database.SaveChangesAsync();
                         }
                         item.RoomNumber = database.Rooms.ToList().Find(room => room.RoomId == item.AssignRoomId).RoomNumber;
                         TotalAmountReceived += item.TotalAmount;

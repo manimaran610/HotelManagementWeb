@@ -1,86 +1,52 @@
 ﻿
 @{
     ViewBag.Title = "SampleView";
-    Layout = "";
+    Layout = "~/Views/Shared/HomeLayout.cshtml";
 }
-
-
-<head>
-   
-    <title>Create account</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-          rel="stylesheet" />
-    <link rel="stylesheet" href="~/Content/tailwind.output.css" />
-    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"
-            defer></script>
-    
-</head>
 <body>
-    <div class="flex  items-center min-h-screen p-6 bg-gray-50 ">
-        <div class="flex-1  h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl ">
-            <div class="flex  flex-col overflow-y-auto md:flex-row">
-                <div class="h-32 md:h-auto md:w-1/2">
-                    <img aria-hidden="true"
-                         class="object-cover w-full h-full dark:hidden"
-                         src="https://i.pinimg.com/originals/41/33/51/41335195de2f95b4761971e1bdedda08.jpg"
-                         alt="Office" />
-                    
-                </div>
-                <div class="flex  items-center justify-center p-6 md:w-1/2">
-                    <div class="w-full">
-                        <h1 class="mb-4 text-xl font-semibold text-gray-700 ">
-                            Create account
-                        </h1>
-                        <label class="block text-sm">
-                            <span class="text-gray-700">Email</span>
-                            <input class="block w-full mt-1 text-sm focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-                                   placeholder="Jane Doe" />
-                        </label>
-                        <label class="block mt-4 text-sm">
-                            <span class="text-gray-700 ">Password</span>
-                            <input class="block w-full mt-1 text-sm  focus:border-purple-400 focus:outline-none focus:shadow-outline-purple form-input"
-                                   placeholder="***************"
-                                   type="password" />
-                        </label>
-                        <label class="block mt-4 text-sm">
-                            <span class="text-gray-700">
-                                Confirm password
-                            </span>
-                            <input class="block w-full mt-1 text-sm focus:border-purple-400 focus:outline-none focus:shadow-outline-purple  form-input"
-                                   placeholder="***************"
-                                   type="password" />
-                        </label>
+    <div class=" m-0">
 
-                        <div class="flex mt-6 text-sm">
-                            <label class="flex items-center">
-                                <input type="checkbox"
-                                       class="text-purple-600 form-checkbox focus:border-purple-400 focus:outline-none focus:shadow-outline-purple " />
-                                <span class="ml-2">
-                                    I agree to the
-                                    <span class="underline">privacy policy</span>
-                                </span>
-                            </label>
-                        </div>
 
-                       
-                        <a class="block w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
-                           href="">
-                            Create account
-                        </a>
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#myCarousel" data-slide-to="1"></li>
+                <li data-target="#myCarousel" data-slide-to="2"></li>
 
-                        <hr class="my-8" />
+            </ol>
+            <div class="carousel-inner">
+                <div class=" item active">
+                    <img src="~/Content/slider1.jpg" alt="First Slide" style="width:100%; min-height:300px;max-height:600px; ">
+                    <div class="carousel-caption">
+                        <p>A Best Place To Enjoy Your Life</p>
 
-                        
-
-                        <p class="mt-4">
-                            <a class="text-sm font-medium text-purple-600 hover:underline"
-                               href="">
-                                Already have an account? Login
-                            </a>
-                        </p>
                     </div>
                 </div>
+                <div class=" item">
+                    <img src="~/Content/slider2.jpg" alt="second slide" style="width:100%; min-height:300px;max-height:600px; ">
+                    <div class="carousel-caption">
+                        <p>Reserve Room for Family Vacation</p>
+
+                    </div>
+                   
+                </div>
+
+                <div class=" item">
+                    <img src="~/Content/slider3.jpg" alt="Third slide" style="width:100%; min-height:300px;max-height:600px; ">
+                    <div class="carousel-caption">
+                        <p>Make Your Vacation Comfortable</p>
+                    </div>
+                   
+                </div>
             </div>
+            <a class="carousel-control left" href="#myCarousel" role="button" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control right" href="#myCarousel" role="button" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
         </div>
     </div>
 </body>
