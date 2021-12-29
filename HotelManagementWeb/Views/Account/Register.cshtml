@@ -82,7 +82,7 @@
                                     @Html.LabelFor(m => m.Password)
                                 </span>
                                 @Html.TextBoxFor(m => m.Password, new { @class = " block w-full mt-1 text-sm focus:border-purple-400 focus:outline-none focus:shadow-outline-purple   form-input", @type = "password" })
-                                @Html.ValidationMessageFor(item => item.Password, "", new { @class = "text-red-600" })
+                                @Html.ValidationMessageFor(item => item.Password, "", new { @class = "text-red-600",@type="password" })
                             </label>
                             <label class="block text-sm mb-4">
                                 <span class="text-gray-700">

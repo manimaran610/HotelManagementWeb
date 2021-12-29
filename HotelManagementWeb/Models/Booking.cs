@@ -20,10 +20,12 @@ namespace HotelManagementWeb.Models
         [Column(TypeName = "date")]
         [DataType(DataType.Date)]
       
+        [Display(Name ="CheckIn")]
         public DateTime BookingFrom { get; set; }
 
         [Column(TypeName = "date")]
         [DataType(DataType.Date)]
+        [Display(Name = "CheckOut")]
         public DateTime BookingTo { get; set; }
 
         public int AssignRoomId { get; set; }

@@ -3,10 +3,7 @@
 using HotelManagementWeb.Models;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
-using System.Data.Entity.Migrations;
-using System.Diagnostics;
-using System.IO;
+
 using System.Linq;
 
 using System.Web.Mvc;
@@ -23,19 +20,21 @@ namespace HotelManagementWeb.Controllers
 
         }
         [HttpPost]
+        [AllowAnonymous]
         public ActionResult Index(CheckInOut model)
         {
             if (ModelState.IsValid)
             {
-                if (model.CheckIn.Date < DateTime.Now.Date || model.CheckOut.Date < DateTime.Now.Date ||model.CheckOut.Date <=model.CheckIn.Date)
+                if (model.CheckIn.Date < DateTime.Now.Date || model.CheckOut.Date < DateTime.Now.Date || model.CheckOut.Date <= model.CheckIn.Date)
                 {
-                    if(model.CheckIn.Date < DateTime.Now.Date)ViewData["CheckInError"] = "Date must be greater than or equal to Today's Date";
-                    if(model.CheckOut.Date < DateTime.Now.Date)ViewData["CheckOutError"] = "Date must be greater than Today's Date";
+                    if (model.CheckIn.Date < DateTime.Now.Date) ViewData["CheckInError"] = "Date must be greater than or equal to Today's Date";
+                    if (model.CheckOut.Date < DateTime.Now.Date) ViewData["CheckOutError"] = "Date must be greater than Today's Date";
                     if (model.CheckOut.Date <= model.CheckIn.Date) ViewData["CheckOutError"] = "Date must be greater than CheckIn Date";
                     return View(model);
                 }
 
-            }return RedirectToAction("Rooms",model);
+            }
+            return RedirectToAction("Rooms", model);
         }
 
 
@@ -53,59 +52,58 @@ namespace HotelManagementWeb.Controllers
             return View();
         }
 
-        
+
+        [AllowAnonymous]
         public ActionResult Rooms(CheckInOut model)
         {
-
+            if (model.CheckIn.Date < DateTime.Now.Date) return View("Error");
             using (var database = new HMSContext())
             {
                 var BookedRooms = database.Bookings.ToList().FindAll(item => (model.CheckIn.Date >= item.BookingFrom.Date && model.CheckIn.Date <= item.BookingTo.Date) ||
                 (model.CheckOut.Date >= item.BookingFrom.Date && model.CheckOut.Date <= item.BookingTo.Date));
                 List<Room> rooms = database.Rooms.ToList();
                 BookedRooms.ForEach(room => rooms.RemoveAll(item => item.RoomId == room.AssignRoomId));
-               
-
                 foreach (var item in rooms)
                 {
-                   item.Type= database.RoomTypes.ToList().Find(eachItem => eachItem.RoomTypeId == item.RoomTypeId).RoomType;
-                    item.CheckIn=model.CheckIn;
+                    item.Type = database.RoomTypes.ToList().Find(eachItem => eachItem.RoomTypeId == item.RoomTypeId).RoomType;
+                    item.CheckIn = model.CheckIn;
                     item.CheckOut = model.CheckOut;
                 }
-
                 return View(rooms);
             }
         }
 
 
-      
-        public ActionResult BookingRoom(Room room=null)
+
+        public ActionResult BookingInvoice(int RoomId, int RoomCapacity, DateTime CheckIn, DateTime CheckOut, decimal RoomPrice)
 
         {
-            if (room.RoomId == 0) return View("Error");
+
+            //if (room.RoomId == 0) return View("Error");
+
             var db = new ApplicationDbContext();
-           var data = db.Users.Where(item => item.Email == User.Identity.Name).First();
+            var data = db.Users.Where(item => item.Email == User.Identity.Name).First();
 
             var model = new Booking();
             model.CustomerName = data.FullName;
             model.CustomerEmail = data.Email;
-            model.AssignRoomId = room.RoomId;
-            model.NoOfMembers = room.RoomCapacity;
-            model.BookingFrom =  room.CheckIn;
-            model.BookingTo = room.CheckOut;
-            model.NumberOfDays = (room.CheckOut - room.CheckIn).Days;
-            model.RoomPrice = room.RoomPrice;
-            model.MaxCapacity= room.RoomCapacity;
+            model.AssignRoomId = RoomId;
+            model.NoOfMembers = RoomCapacity;
+            model.BookingFrom = CheckIn;
+            model.BookingTo = CheckOut;
+            model.NumberOfDays = (CheckOut - CheckIn).Days;
+            model.RoomPrice = RoomPrice;
+            model.MaxCapacity = RoomCapacity;
             model.Phone = Decimal.Round(Decimal.Parse(data.PhoneNumber));
-            model.ValueAddedTax= Decimal.Round(Decimal.Multiply((Decimal)room.RoomPrice, (Decimal)0.18));
+            model.ValueAddedTax = Decimal.Round(Decimal.Multiply((Decimal)RoomPrice, (Decimal)0.18));
             model.TotalAmount = model.RoomPrice + model.ValueAddedTax;
 
-            model.TotalAmount= Decimal.Multiply((Decimal)model.TotalAmount, model.NumberOfDays);
-           
-           return View(model);
+            model.TotalAmount = Decimal.Multiply((Decimal)model.TotalAmount, model.NumberOfDays);
+            return View(model);
         }
 
         [HttpPost]
-        public ActionResult BookingRoom(Booking model)
+        public ActionResult BookingInvoice(Booking model)
         {
             if (ModelState.IsValid)
             {
@@ -114,35 +112,34 @@ namespace HotelManagementWeb.Controllers
                     ViewData["NoOfMembers"] = "Maximum capacity is upto " + model.MaxCapacity + "  person";
                     return View(model);
                 }
-                using(var database = new HMSContext())
+                using (var database = new HMSContext())
                 {
                     database.Bookings.Add(model);
-                    
                     database.SaveChanges();
                 }
                 return PartialView("BookedScreen");
             }
-            return RedirectToAction("BookingRoom",model);
+            return RedirectToAction("BookingRoom", model);
         }
-        
+
+
         public ActionResult UserBookings()
         {
-            using(var database=new HMSContext())
+            using (var database = new HMSContext())
             {
-               var BookedList =  database.Bookings.ToList().FindAll(item => item.CustomerEmail == User.Identity.Name);
-                foreach(var item in BookedList)
+                var BookedList = database.Bookings.ToList().FindAll(item => item.CustomerEmail == User.Identity.Name);
+                foreach (var item in BookedList)
                 {
                     item.RoomNumber = database.Rooms.ToList().Find(room => room.RoomId == item.AssignRoomId).RoomNumber;
                 }
                 if (BookedList.Count == 0) ViewBag.NoBookings = "There are no record of bookings from you";
                 return View(BookedList);
-
             }
         }
-      
+
         public ActionResult SampleView()
         {
-            return View();
+            return View("BookedScreen");
         }
 
     }

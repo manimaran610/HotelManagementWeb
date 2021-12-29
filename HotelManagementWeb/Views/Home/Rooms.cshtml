@@ -3,14 +3,17 @@
     ViewBag.Title = "Rooms";
 }
 
-<h2>Rooms</h2>
-<div class="container" >
+<h2 class="text-center">Available Rooms</h2>
+<div class="container-fluid p-6 " >
     @foreach (var item in Model)
     {
-        //item.CheckInOutDate.CheckIn = (DateTime)ViewData["CheckIn"];
-        //item.CheckInOutDate.CheckOut = (DateTime)ViewData["CheckOut"];
+       
+        //item.ImageByte = null;
 
-        @Html.Partial("RoomCard", item)
+       
+            Html.RenderPartial("RoomCard", item);
+        
+
     }
 
 </div>

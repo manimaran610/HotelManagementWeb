@@ -28,7 +28,7 @@
 </style>
 <h2>@ViewBag.Title</h2>
 <div>
-    @using (Html.BeginForm((string)ViewData["PostAction"], "DashBoard", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    @using (Html.BeginForm((string)ViewData["PostAction"], "Room", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
        
@@ -36,7 +36,7 @@
             @Html.LabelFor(item => item.RoomNumber)
             @Html.TextBoxFor(item => item.RoomNumber, new { @class = "form-control" })
             <p class="text-danger"></p>
-            @Html.ValidationMessageFor(item => item.RoomNumber,"",new { @class = "text-danger" })
+            @Html.ValidationMessageFor(item => item.RoomNumber, "", new { @class = "text-danger" })
         </div>
         <div class="form-group">
             @Html.LabelFor(item => item.RoomPrice)
@@ -52,11 +52,11 @@
         @Html.LabelFor(item => item.BookingStatusId)
         @Html.DropDownListFor(item => item.BookingStatusId, new SelectList(Model.BookStatusList, "BookingStatusId", "Status"), new { @class = "form-control" })
 
-<div class="form-group">
-    @Html.LabelFor(item => item.RoomImage)
-    <input type="file" class="form-control" name="UploadedImage" id="UploadedImage" onchange="previewFile(this)" @ViewBag.required />
-    @Html.ValidationMessageFor(item => item.UploadedImage, "", new { @class = "text-danger" })
-</div>
+        <div class="form-group">
+            @Html.LabelFor(item => item.RoomImage)
+            <input type="file" class="form-control" name="UploadedImage" id="UploadedImage" onchange="previewFile(this)" @ViewBag.required />
+            @Html.ValidationMessageFor(item => item.UploadedImage, "", new { @class = "text-danger" })
+        </div>
         <div>
             @if (Model.RoomImage != null)
             {

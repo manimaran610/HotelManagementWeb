@@ -174,6 +174,7 @@
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\RoomController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -268,13 +269,11 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Dashboard\AddOrUpdateRoom.cshtml" />
-    <Content Include="Views\Dashboard\AddRoomPost.cshtml" />
     <Content Include="Views\Dashboard\ConfirmDelete.cshtml" />
     <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\Home\RoomCard.cshtml" />
     <Content Include="Views\Home\Rooms.cshtml" />
-    <Content Include="Views\Home\BookingRoom.cshtml" />
+    <Content Include="Views\Home\BookingInvoice.cshtml" />
     <Content Include="Views\Shared\DashboardLayoutView.cshtml" />
     <Content Include="Views\Dashboard\Bookings.cshtml" />
     <Content Include="Views\Dashboard\_ViewStart.cshtml" />
@@ -282,7 +281,9 @@
     <Content Include="Views\Home\BookedScreen.cshtml" />
     <Content Include="Views\Home\UserBookings.cshtml" />
     <Content Include="Views\Home\SampleView.cshtml" />
-    <Content Include="Views\Shared\HomeLayout.cshtml" />
+    <Content Include="Views\Room\AddOrUpdateRoom.cshtml" />
+    <Content Include="Views\Room\_ViewStart.cshtml" />
+    <Content Include="Views\Room\AddRoomPost.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

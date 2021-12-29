@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "Log in";
     Layout = "";
+    Html.EnableClientValidation(true);
 }
 
 <head>
@@ -45,7 +46,7 @@
                                 <span class="text-gray-700">
                                     @Html.LabelFor(m => m.Password)
                                 </span>
-                                @Html.TextBoxFor(m => m.Password, new { @class = " block w-full mt-1 text-sm focus:border-purple-400 focus:outline-none focus:shadow-outline-purple  form-input" ,@type="password"})
+                                @Html.TextBoxFor(m => m.Password, new { @class = " block w-full mt-1 text-sm focus:border-purple-400 focus:outline-none focus:shadow-outline-purple  form-input " ,@type="password"})
                                 @Html.ValidationMessageFor(item => item.Password, (string)ViewData["DateOfBirth"], new { @class = "text-red-600" })
                             </label>
                             <div class="flex mt-6 text-sm">

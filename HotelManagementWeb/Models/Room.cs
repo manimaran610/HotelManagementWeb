@@ -10,18 +10,18 @@ namespace HotelManagementWeb.Models
     public class Room
     {
 
-        
+
         public int RoomId { get; set; }
 
-        [Required] 
+        [Required]
         [Display(Name = "Room Number")]
-        
+
         public int? RoomNumber { get; set; }
 
         [Display(Name = "Image")]
 
         public string RoomImage { get; set; }
-        
+
         [Display(Name = "Price")]
         [Required]
         public decimal? RoomPrice { get; set; }
@@ -33,20 +33,26 @@ namespace HotelManagementWeb.Models
         public int RoomTypeId { get; set; }
         [Required]
         [Display(Name = "Capacity")]
-       [RegularExpression("^[1-9]$|^[1-2]{1}[0-8]{1}$",ErrorMessage ="Range for Capacity is from 1 - 28")]
+        [RegularExpression("^[1-9]$|^[1-2]{1}[0-8]{1}$", ErrorMessage = "Range for Capacity is from 1 - 28")]
         public int? RoomCapacity { get; set; }
 
         [Required]
         [StringLength(550)]
         [Display(Name = "Description")]
         public string RoomDescription { get; set; }
+
+
+       // public byte[] ImageByte { get; set; }
+
+       
         public bool IsActive { get; set; }
 
 
 
+       
 
         [NotMapped]
-      
+
         public HttpPostedFileBase UploadedImage { get; set; }
 
         [NotMapped]

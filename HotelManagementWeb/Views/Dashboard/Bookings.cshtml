@@ -4,59 +4,71 @@
 }
 
 <h2>Bookings</h2>
-<a class="btn btn-warning pull-left" href="@Url.Action("Bookings",new {id = 1 })">Show Current Bookings only</a>
-<a class="btn btn-danger pull-right" data-toggle="modal" data-target="#2" >Remove completed Bookings</a>
+<a class="btn btn-warning pull-left" href="@Url.Action("Bookings",new {Id=1 })">Show Current Bookings only</a>
+
 <table class="table table-striped table-bordered table-responsive" style="margin-top:20px">
     <tr>
-        <th>OrderId</th>
+        <th>BookingId</th>
         <th>Customer Name</th>
         <th>CheckIn</th>
         <th>CheckOut</th>
         <th>No.of Person</th>
         <th>Assigned Room</th>
         <th>Total Amount</th>
+        <th>Cancel Order</th>
     </tr>
     @foreach (var data in Model)
     {
-        <tr>
-            <td>@data.BookingId</td>
-            <td>@data.CustomerName</td>
-            <td>@data.BookingFrom.ToShortDateString()</td>
-            <td>@data.BookingTo.ToShortDateString()</td>
-            <td>@data.NoOfMembers</td>
-            <td>@data.RoomNumber</td>
-            <td>₹@data.TotalAmount</td>
+<tr>
+    <td>@data.BookingId</td>
+    <td>@data.CustomerName</td>
+    <td>@data.BookingFrom.ToShortDateString()</td>
+    <td>@data.BookingTo.ToShortDateString()</td>
+    <td>@data.NoOfMembers</td>
+    <td>@data.RoomNumber</td>
+    <td>₹@data.TotalAmount</td>
 
-        </tr>
-       
-        
+    @if (data.BookingTo.Date < DateTime.Now.Date)
+    {
+        <td>Completed</td>
+    }
+    else
+    {
+        <td><a class="btn text-red-600" data-toggle="modal" data-target="#@data.BookingId">Cancel</a></td>
+    }
+</tr>
+
+
+        <div class="modal fade" id="@data.BookingId" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Confirm Delete</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to Cancel this Booking <span class="font-bold">#@data.BookingId</span> ?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <a type="button" class="btn btn-primary" style="width:75px" href="@Url.Action("CancelBookedRoom",data)">Yes</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
 
     }
 </table>
 <div class="row">
     <center>
-        <h4 >
+        <h4>
             Total Amount Received :
             <span class="text-danger">₹@ViewBag.TotalAmountReceived </span>
         </h4>
     </center>
-</div>
-<div class="modal fade" id="2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Confirm Delete</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                Are you sure you want to remove previous booking history ?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <a type="button" class="btn btn-primary" style="width:75px" href="@Url.Action("Bookings",new {id = 2 })">Yes</a>
-            </div>
-        </div>
-    </div>
 </div>
