@@ -1,23 +1,51 @@
 ﻿@using Microsoft.AspNet.Identity
 @using HotelManagementWeb.Models
+
 @if (Request.IsAuthenticated)
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
-    @Html.AntiForgeryToken()
+        @Html.AntiForgeryToken()
 
-    <ul class="nav navbar-nav navbar-right">
-        
-        @{ 
-            var db = new ApplicationDbContext();
-         
-            var Name = db.Users.ToList().Find(item => item.Email == User.Identity.Name).FullName;
-        }
-        <li>
-            @Html.ActionLink("Hello " +Name+ "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
-        </li>
-        <li class="mr-32"><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
-    </ul>
+        <ul class="nav navbar-nav navbar-right">
+
+            @{
+                var db = new ApplicationDbContext();
+
+                var Name = db.Users.ToList().Find(item => item.Email == User.Identity.Name).FullName;
+            }
+            @*<li>
+                    @Html.ActionLink("Hello " +Name+ "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                </li>*@
+            <li class="nav-item dropdown mr-32">
+                <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Hello @Name! <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    @if (User.IsInRole("Admin"))
+                    {
+
+
+                        <li><a class="dropdown-item" href=@Url.Action("Index","Dashboard")>Dashboard</a></li>
+                        <div class="divider"></div>
+                        <li ><a class="dropdown-item" href="javascript:document.getElementById('logoutForm').submit()">Sign Out</a></li>
+
+                    }
+                    else
+                    {
+                        <li><a class="dropdown-item" href="@Url.Action("UserProfile","home")">Profile</a></li>
+                        <li><a class="dropdown-item" href=@Url.Action("UserBookings","home")>My Bookings</a></li>
+                        <div class="divider"></div>
+                        <li ><a class="dropdown-item" href="javascript:document.getElementById('logoutForm').submit()">Sign Out</a></li>
+
+
+                    }
+
+
+                </ul>
+            </li>
+            @*<li class="mr-32"><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>*@
+        </ul>
     }
 }
 else

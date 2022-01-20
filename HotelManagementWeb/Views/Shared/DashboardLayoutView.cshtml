@@ -23,7 +23,7 @@
                     <span class="icon-bar "></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
-                </button><div class="ml-32">
+                </button><div class="ml-16">
                     @Html.ActionLink("Hotel Elite", "Index", "Home", new { area = "" }, new { @class = "navbar-brand pull-left" })
                 </div>
             </div>
@@ -49,8 +49,9 @@
 
         <div class="list-group  col-md-2 col-sm-auto col-lg-2">
             <h2 class="text-center" style="font-weight:bold">Dashboard</h2><hr />
-            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="@Url.Action("Index","Dashboard")">Manage Rooms</a>
-            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="@Url.Action("Bookings","Dashboard",new {id=0 })">Bookings</a>
+            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="@Url.Action("Index", "Dashboard")">Manage Rooms</a>
+            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="@Url.Action("Bookings", "Dashboard", new { id = 0})">User Bookings</a>
+            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="@Url.Action("Bookings","Dashboard",new {id=0,FilterManagementBookings=true })">Management Bookings</a>
             <a class="list-group-item list-group-item-action list-group-item-light p-3" href="@Url.Action("Users","Dashboard")">Users</a>
 
 
@@ -64,7 +65,7 @@
     <div style="bottom:0;position: fixed; width:100%;">
         <hr style="width:100%;" />
         <footer>
-            <p class="font-bold">&copy; @DateTime.Now.Year - Hotel Elite</p>
+            <p class="font-bold ml-16">&copy; @DateTime.Now.Year - Hotel Elite</p>
         </footer>
     </div>
 

@@ -4,7 +4,7 @@
 }
 
 <h2>Bookings</h2>
-<a class="btn btn-warning pull-left" href="@Url.Action("Bookings",new {Id=1 })">Show Current Bookings only</a>
+<a class="btn btn-warning pull-left" href="@Url.Action("Bookings",new {Id=1,FilterManagementBookings=ViewBag.FilterManagementBookings })">Show Current Bookings only</a>
 
 <table class="table table-striped table-bordered table-responsive" style="margin-top:20px">
     <tr>
@@ -14,6 +14,7 @@
         <th>CheckOut</th>
         <th>No.of Person</th>
         <th>Assigned Room</th>
+        <th>MobileNo</th>
         <th>Total Amount</th>
         <th>Cancel Order</th>
     </tr>
@@ -24,9 +25,12 @@
     <td>@data.CustomerName</td>
     <td>@data.BookingFrom.ToShortDateString()</td>
     <td>@data.BookingTo.ToShortDateString()</td>
+
     <td>@data.NoOfMembers</td>
     <td>@data.RoomNumber</td>
+    <td>@data.MobileNo</td>
     <td>₹@data.TotalAmount</td>
+
 
     @if (data.BookingTo.Date < DateTime.Now.Date)
     {

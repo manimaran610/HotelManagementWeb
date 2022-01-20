@@ -28,33 +28,43 @@
         }
 
     .card-1 {
-        background-image: url(https://image.flaticon.com/icons/png/512/488/488682.png);
+      
         background-repeat: no-repeat;
         background-position: right;
-        background-size: 80px;
+       
+        background-size: 130px;
     }
+
+    
   
 </style>
 
 <center class="mt-20">
     <h2>@ViewBag.NoBookings</h2>
+    <h3 class="text-gray-900 font-semibold justify-center">My Bookings</h3><br />
 </center>
 
 
 
-<div class="container-fluid">
+<div class="container-fluid well " style="margin-left:50px;margin-right:50px">
 
     @foreach (var data in Model)
     { 
-        <div class="col-md-4 col-lg-3 mt-10">
-            <div class="card card-1">
-               
-                <h4 class="mt-2 mb-10 " style="font-weight:bold">Room Number - @data.RoomNumber </h4>
+        <div class="col-md-5 col-lg-4 mt-10" >
+            <div class="card card-1  " style="min-width:300px;background-image:url(@data.QRCode)">
+
+                <h4 class="mt-2 mb-10 " style="font-weight:bold">Room Number - @data.RoomNumber<span> <img src="https://image.flaticon.com/icons/png/512/488/488682.png" class="h-16" /></span> </h4>
+                <hr />
                 <h5> CheckIn:  @data.BookingFrom.ToShortDateString()</h5>
                 <h5>CheckOut:@data.BookingTo.ToShortDateString()</h5>
                 <h5>No.Of Persons : @data.NoOfMembers</h5>
                 <p style="font-weight:bold">OrderID :#@data.BookingId</p>
+                
+                <hr class="m-5"></hr>
                 <h4 class="btn bg-purple-600 text-white">Amount-Paid : @data.TotalAmount</h4>
+                @*<div>
+            <img src="@data.QRCode" class=" " />
+        </div>*@
             </div>
 
         </div>

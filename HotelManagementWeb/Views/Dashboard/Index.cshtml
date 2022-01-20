@@ -43,19 +43,23 @@
 
 
     <td>@data.RoomNumber</td>
-    @*<td><img src="data:image/png;base64,@Convert.ToBase64String(data.ImageByte)"></td>*@
-    <td><img src="~/RoomImages/@data.RoomImage"</td>
+    @*<td><img src="data:image;base64,@Convert.ToBase64String(data.ImageByte)"></td>*@
+ 
+    <td><img src="~/RoomImages/@data.RoomImage" /></td>
     <td>@data.Type</td>
     <td>@data.RoomCapacity</td>
     <td>@data.Status</td>
     <td>@data.RoomDescription</td>
     <td>@data.RoomPrice</td>
+
+    
     <td>
-        <a class="btn btn-primary btn-sm" style="margin-right:5px" href="@Url.Action("EditRoom","Room", @*new { Id = data.RoomId }*@ data)">Edit</a>
+        <a class="btn btn-primary btn-sm" style="margin-right:5px"  href="@Url.Action("EditRoom", "Room", @*new { Id = data.RoomId }*@  data)">Edit</a>
         <a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#@data.RoomId">Delete</a>
     </td>
 
-
+    @{Html.RenderPartial("ConfirmDelete", data);
+    }
 
 </tr>
 

@@ -42,14 +42,15 @@ namespace HotelManagementWeb.Models
         public string RoomDescription { get; set; }
 
 
-       // public byte[] ImageByte { get; set; }
+      [NotMapped]
+        public Byte[] ImageByte { get; set; }
 
-       
+
         public bool IsActive { get; set; }
 
 
 
-       
+
 
         [NotMapped]
 

@@ -4,16 +4,10 @@
 }
 
 <h2 class="text-center">Available Rooms</h2>
-<div class="container-fluid p-6 " >
+<div class="container-fluid  p-6 mb-16 " style="margin-left:50px;margin-right:50px">
     @foreach (var item in Model)
     {
-       
-        //item.ImageByte = null;
-
-       
-            Html.RenderPartial("RoomCard", item);
-        
-
+        Html.RenderPartial("RoomCard", item);
     }
 
 </div>

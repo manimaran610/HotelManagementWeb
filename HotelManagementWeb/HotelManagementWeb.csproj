@@ -55,6 +55,11 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="QRCoder, Version=1.4.3.0, Culture=neutral, PublicKeyToken=c4ed5b9ae8358a28, processorArchitecture=MSIL">
+      <HintPath>..\packages\QRCoder.1.4.3\lib\net40\QRCoder.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -108,9 +113,6 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
@@ -119,6 +121,7 @@
       <Private>True</Private>
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.AspNet.Identity.Core">
@@ -174,6 +177,7 @@
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\RoomBookingController.cs" />
     <Compile Include="Controllers\RoomController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -273,17 +277,18 @@
     <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\Home\RoomCard.cshtml" />
     <Content Include="Views\Home\Rooms.cshtml" />
-    <Content Include="Views\Home\BookingInvoice.cshtml" />
     <Content Include="Views\Shared\DashboardLayoutView.cshtml" />
     <Content Include="Views\Dashboard\Bookings.cshtml" />
     <Content Include="Views\Dashboard\_ViewStart.cshtml" />
     <Content Include="Views\Dashboard\Users.cshtml" />
-    <Content Include="Views\Home\BookedScreen.cshtml" />
     <Content Include="Views\Home\UserBookings.cshtml" />
     <Content Include="Views\Home\SampleView.cshtml" />
     <Content Include="Views\Room\AddOrUpdateRoom.cshtml" />
     <Content Include="Views\Room\_ViewStart.cshtml" />
     <Content Include="Views\Room\AddRoomPost.cshtml" />
+    <Content Include="Views\RoomBooking\BookingInvoice.cshtml" />
+    <Content Include="Views\RoomBooking\BookedScreen.cshtml" />
+    <Content Include="Views\Home\UserProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

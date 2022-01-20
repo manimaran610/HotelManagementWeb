@@ -1,0 +1,65 @@
+﻿@model HotelManagementWeb.Models.ApplicationUser
+@{
+    ViewBag.Title = "Profile";
+}
+
+<center>
+    <br />
+    <h2 class="font-semibold">My Profile</h2>
+    <div class="card  shadow  " style="width:600px">
+        <div class="bg-orange-500 m-0">
+
+
+            @if (Model.Gender == "Female")
+            {
+
+                <img src="https://www.pinclipart.com/picdir/big/183-1839686_brown-long-hair-lady-with-red-glasses-icon.png" class="img img-responsive mt-6" style="height:150px" />
+            }
+            else
+            {
+                <img src="https://img.icons8.com/bubbles/100/000000/user.png" class="img img-responsive mt-6" style="height:150px" />
+            }
+        </div>
+        <br />
+
+        <div class="card-block">
+            <h4 class="font-bold">@Model.FullName</h4>
+
+            <hr />
+            
+            <div class="row">
+                <div class="col-sm-6 ">
+                    <h5 class="font-bold f-w-600">Email</h5>
+                    <h6 class="text-muted f-w-400">@Model.Email</h6>
+                </div>
+                
+                <div class="col-sm-6">
+                    <h5 class="font-bold">Phone</h5>
+                    <h6 class="text-muted f-w-400">@Model.PhoneNumber</h6>
+
+                   
+                </div>
+              
+                <div class="col-sm-6">
+                    <h5 class="font-bold">DateOfBirth</h5>
+                    <h6 class="text-muted f-w-400">@Model.DateOfBirth.ToShortDateString()</h6>
+                </div>
+                <div class="col-sm-6">
+                    <h5 class="font-bold">Gender</h5>
+                    <h6 class="text-muted f-w-400">@Model.Gender</h6>
+                </div>
+            </div>
+
+
+            @*<h3 class="font-semibold">Name : <span class="ml-3">Mani Maran</span></h3>
+                <hr />
+                <h3 class="font-semibold">DateOfBirth :<span>06/10/1999</span></h3>
+                <hr />
+                <h3 class="font-semibold">Phone :<span>9940486923</span> </h3>
+                <hr />
+                <h3 class="font-semibold">Email : <span>Mani@gmail.com</span></h3>
+                <hr />*@
+        </div>
+    </div>
+    </div>
+</center>
