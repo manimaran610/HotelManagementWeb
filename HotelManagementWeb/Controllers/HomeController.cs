@@ -15,7 +15,7 @@ namespace HotelManagementWeb.Controllers
 {
     public class HomeController : Controller
     {
-
+        [HttpGet]
         [AllowAnonymous]
         public ActionResult Index()
         {
@@ -108,13 +108,6 @@ namespace HotelManagementWeb.Controllers
             }
             return View(user);
         }
-
-
-            public ActionResult SampleView()
-        {
-            return View("BookedScreen");
-        }
-
 
 
         //QR code Generator

@@ -61,7 +61,7 @@
         <div class="m-6" >
             @if (Model.RoomImage != null)
             {
-                <img class="img img-responsive " src="~/RoomImages/@Model.RoomImage" id="previewImg" style="height:105px" aria-hidden="true" />
+                <img class="img img-responsive " src="~/Content/RoomImages/@Model.RoomImage" id="previewImg" style="height:105px" aria-hidden="true" />
                 @Html.HiddenFor(item => item.RoomImage)
                 @Html.HiddenFor(item => item.RoomId)
             }

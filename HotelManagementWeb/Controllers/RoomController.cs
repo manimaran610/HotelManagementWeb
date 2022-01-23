@@ -72,7 +72,7 @@ namespace HotelManagementWeb.Controllers
                     {
                         // Image saving in the project folder
                         string ImageName = model.RoomNumber + randomnumber.Next() + Path.GetExtension(model.UploadedImage.FileName);
-                        model.UploadedImage.SaveAs(Server.MapPath("~/RoomImages/" + ImageName));
+                        model.UploadedImage.SaveAs(Server.MapPath("~/Content/RoomImages/" + ImageName));
                         model.RoomImage = ImageName;
 
                         ////Image saving as bytes in the database
@@ -107,10 +107,10 @@ namespace HotelManagementWeb.Controllers
                 {
                     if (model.UploadedImage != null)
                     {
-                        FileInfo file = new FileInfo(Server.MapPath("~/RoomImages/" + model.RoomImage));
+                        FileInfo file = new FileInfo(Server.MapPath("~/Content/RoomImages/" + model.RoomImage));
                         file.Delete();
                         string ImageName = model.RoomNumber + randomnumber.Next() + Path.GetExtension(model.UploadedImage.FileName);
-                        model.UploadedImage.SaveAs(Server.MapPath("~/RoomImages/" + ImageName));
+                        model.UploadedImage.SaveAs(Server.MapPath("~/Content/RoomImages/" + ImageName));
                         model.RoomImage = ImageName;
 
                         //model.ImageByte= new byte[model.UploadedImage.ContentLength];
@@ -138,7 +138,7 @@ namespace HotelManagementWeb.Controllers
                     var room = database.Rooms.Where(item => item.RoomId == Id).First();
                     database.Rooms.Remove(room);
                     database.SaveChanges();
-                    FileInfo file = new FileInfo(Server.MapPath("~/RoomImages/" + room.RoomImage));
+                    FileInfo file = new FileInfo(Server.MapPath("~/Content/RoomImages/" + room.RoomImage));
                     file.Delete();
                     return RedirectToAction("Index", "Dashboard");
                 }

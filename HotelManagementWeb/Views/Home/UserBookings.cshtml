@@ -32,7 +32,7 @@
         background-repeat: no-repeat;
         background-position: right;
        
-        background-size: 130px;
+        background-size: 135px;
     }
 
     
@@ -60,11 +60,9 @@
                 <h5>No.Of Persons : @data.NoOfMembers</h5>
                 <p style="font-weight:bold">OrderID :#@data.BookingId</p>
                 
-                <hr class="m-5"></hr>
+                @*<hr class="m-5"/>*@
                 <h4 class="btn bg-purple-600 text-white">Amount-Paid : @data.TotalAmount</h4>
-                @*<div>
-            <img src="@data.QRCode" class=" " />
-        </div>*@
+                <h6 class="text-muted">To cancel the room - contactUs</h6>
             </div>
 
         </div>

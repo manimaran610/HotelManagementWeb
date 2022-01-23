@@ -8,6 +8,7 @@
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.0.1/tailwind.min.css'>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
           rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/cd8d557cb2.js" crossorigin="anonymous"></script>
 
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
@@ -24,8 +25,8 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button><div class="ml-16">
-                    @Html.ActionLink("Hotel Elite", "Index", "Home", new { area = "" }, new { @class = "navbar-brand pull-left" })
-                </div>
+    <a class="navbar-brand pull-left" href="@Url.Action( "Index", "Home")"><span><i class="fas fa-umbrella-beach mr-4"></i></span>Hotel Elite</a>
+</div>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -50,9 +51,9 @@
         <div class="list-group  col-md-2 col-sm-auto col-lg-2">
             <h2 class="text-center" style="font-weight:bold">Dashboard</h2><hr />
             <a class="list-group-item list-group-item-action list-group-item-light p-3" href="@Url.Action("Index", "Dashboard")">Manage Rooms</a>
-            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="@Url.Action("Bookings", "Dashboard", new { id = 0})">User Bookings</a>
-            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="@Url.Action("Bookings","Dashboard",new {id=0,FilterManagementBookings=true })">Management Bookings</a>
-            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="@Url.Action("Users","Dashboard")">Users</a>
+            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="@Url.Action("Bookings", "ManageBookings", new { id = 0})">User Bookings</a>
+            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="@Url.Action("Bookings","ManageBookings",new {id=0,FilterManagementBookings=true })">Management Bookings</a>
+            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="@Url.Action("GetAll","User")">Users</a>
 
 
         </div>
