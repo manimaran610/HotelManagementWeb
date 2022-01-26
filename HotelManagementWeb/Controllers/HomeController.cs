@@ -43,16 +43,12 @@ namespace HotelManagementWeb.Controllers
         [AllowAnonymous]
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
-
             return View();
         }
 
         [AllowAnonymous]
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
-
             return View();
         }
 
@@ -79,6 +75,7 @@ namespace HotelManagementWeb.Controllers
         }
 
 
+        [HttpGet]
         public ActionResult UserBookings()
         {
             using (var database = new HMSContext())
@@ -99,12 +96,13 @@ namespace HotelManagementWeb.Controllers
             }
         }
 
-        public  ActionResult UserProfile()
+        [HttpGet]
+        public ActionResult UserProfile()
         {
             ApplicationUser user = new ApplicationUser();
-            using(var database =new ApplicationDbContext())
+            using (var database = new ApplicationDbContext())
             {
-                 user = database.Users.ToList().Find(item => item.Email == User.Identity.Name);
+                user = database.Users.ToList().Find(item => item.Email == User.Identity.Name);
             }
             return View(user);
         }

@@ -10,7 +10,7 @@ namespace HotelManagementWeb.Controllers
     public class RoomBookingController : Controller
     {
         
-        public ActionResult BookingInvoice(int RoomId, int RoomCapacity, DateTime CheckIn, DateTime CheckOut, decimal RoomPrice)
+        public ActionResult BookingInvoice(int RoomId, int RoomCapacity, DateTime CheckIn, DateTime CheckOut, decimal RoomPrice,string Type)
         {
             //if (RoomId == null) return View("Error");
             var db = new ApplicationDbContext();
@@ -30,6 +30,7 @@ namespace HotelManagementWeb.Controllers
             model.ValueAddedTax = Decimal.Round(Decimal.Multiply((Decimal)RoomPrice, (Decimal)0.18));
             model.TotalAmount = model.RoomPrice + model.ValueAddedTax;
             model.TotalAmount = Decimal.Multiply((Decimal)model.TotalAmount, model.NumberOfDays);
+            ViewBag.RoomType = Type;
 
             return View(model);
         }
@@ -54,6 +55,9 @@ namespace HotelManagementWeb.Controllers
             }
             return RedirectToAction("BookingInvoice", model);
         }
-
+        public ActionResult Sample()
+        {
+            return View("BookedScreen");
+        }
     }
 }

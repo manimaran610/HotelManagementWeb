@@ -13,7 +13,16 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
-
+    <style>
+        ul li:hover {
+            background-color: #f8b600;
+        }
+        .form-control:focus {
+            border: none;
+            border-color: #9333ea;
+            box-shadow: 0 0 6px #9333ea;
+        }
+    </style>
 </head>
 
 <body>
@@ -50,10 +59,10 @@
 
         <div class="list-group  col-md-2 col-sm-auto col-lg-2">
             <h2 class="text-center" style="font-weight:bold">Dashboard</h2><hr />
-            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="@Url.Action("Index", "Dashboard")">Manage Rooms</a>
-            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="@Url.Action("Bookings", "ManageBookings", new { id = 0})">User Bookings</a>
-            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="@Url.Action("Bookings","ManageBookings",new {id=0,FilterManagementBookings=true })">Management Bookings</a>
-            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="@Url.Action("GetAll","User")">Users</a>
+            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="@Url.Action("Index", "Dashboard")"><span></span><i class="fas fa-hotel mr-3"></i><span></span>Manage Rooms</a>
+            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="@Url.Action("Bookings", "ManageBookings", new { id = 0})"><span><i class="fas fa-user-tag mr-3"></i></span>User Bookings</a>
+            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="@Url.Action("Bookings","ManageBookings",new {id=0,FilterManagementBookings=true })"><span><i class="fas fa-user-shield mr-3"></i></span>Management Bookings</a>
+            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="@Url.Action("GetAll","User")"><span><i class="fas fa-users mr-3"></i></span>Users</a>
 
 
         </div>

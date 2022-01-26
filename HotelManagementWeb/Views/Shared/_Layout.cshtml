@@ -7,13 +7,24 @@
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.0.1/tailwind.min.css'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://kit.fontawesome.com/cd8d557cb2.js" crossorigin="anonymous"></script>
- 
 
+ 
 
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <style>
+        ul li:hover {
+            background-color: #f8b600;
+        }
 
+        .form-control:focus {
+            border: none;
+            border-color: #9333ea;
+            box-shadow: 0 0 6px #9333ea;
+        }
+    </style>
 </head>
+
 <body>
     <div class="navbar  navbar-fixed-top navbar-inverse ">
         <div class="container-fluid ">
@@ -24,7 +35,7 @@
                     <span class="icon-bar"></span>
                 </button><div class="ml-16">
                     @*@Html.ActionLink("Hotel Elite", "Index", "Home", new { area = "" }, new { @class = "navbar-brand pull-left" })*@
-                             <a class="navbar-brand pull-left" href="@Url.Action( "Index", "Home")"><span><i class="fas fa-umbrella-beach mr-4"></i></span>Hotel Elite</a>
+                             <a class="navbar-brand  pull-left" href="@Url.Action( "Index", "Home")"><span><i class="fas fa-umbrella-beach mr-4"></i></span>Hotel Elite</a>
                 </div>
             </div>
             <div class="navbar-collapse collapse">

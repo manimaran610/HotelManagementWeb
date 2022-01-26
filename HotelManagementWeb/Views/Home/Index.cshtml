@@ -9,8 +9,13 @@
         background: #f8b600;
         color: white;
     }
-    
 </style>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet" />
+<link rel="stylesheet" href="~/Content/tailwind.output.css" />
+<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"
+        defer></script>
+
 <div class=" m-0">
 
 
@@ -24,7 +29,7 @@
         <div class="carousel-inner">
             <div class=" item active">
                 @*<img src="~/Content/slider1.jpg" alt="First Slide" style="width:100%; min-height:300px;max-height:600px; ">*@
-              
+
                 <img src="~/Content/marina.jpg" alt="First Slide" style="width:100%; min-height:300px;max-height:550px; object-fit:cover">
                 <div class="carousel-caption">
                     <p class="fw-bolder font-bold" style="font-size:x-large">A Best Place To Enjoy Your Life</p>
@@ -44,7 +49,7 @@
             <div class=" item">
                 <img src="~/Content/beach2.jpg" alt="second slide" style="width:100%; min-height:300px;max-height:550px; object-fit:cover ">
                 <div class="carousel-caption">
-                    <p class="fw-bolder font-bold" style="font-size:x-large" >Make Your Vacation Comfortable</p>
+                    <p class="fw-bolder font-bold" style="font-size:x-large">Make Your Vacation Comfortable</p>
                 </div>
 
             </div>
@@ -62,9 +67,9 @@
 
 <center>
     <h1 class="mt-16 text-4xl font-semibold text-gray-700 ">
-        Reserve Room for Family Vacation
+        Book Early To Save More
     </h1>
-   
+
 
 
     <div class="container" style="margin-top:50px">
@@ -75,18 +80,18 @@
                 @Html.LabelFor(model => model.CheckIn, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="">
                     @Html.EditorFor(model => model.CheckIn, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.CheckIn, (string)ViewData["CheckInError"], new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(model => model.CheckIn, (string)ViewData["CheckInError"], new { @class = "text-red-600" })
                 </div>
             </div>
             <div class="form-group  col-md-6 ">
                 @Html.LabelFor(model => model.CheckOut, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.CheckOut, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.CheckOut, (string)ViewData["CheckOutError"], new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(model => model.CheckOut, (string)ViewData["CheckOutError"], new { @class = "text-red-600" })
                 </div>
             </div>
-            <div class="col-md-12">
-                <input class="btn bg-purple-700 bg-indigo-700 hover:bg-purple-600 font-bold text-white md:text-lg rounded-lg shadow-md  " type="submit" value="Check Availability" />
+            <div class="col-md-12 mt-4">
+                <input class="btn bg-purple-700 hover:bg-purple-600 font-bold text-white md:text-lg rounded-lg shadow-md w-64 " type="submit" value="Check Availability          " />
             </div>
 
         }

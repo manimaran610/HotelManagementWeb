@@ -14,7 +14,7 @@ namespace HotelManagementWeb.Controllers
     [Authorize(Roles = "Admin")]
     public class DashboardController : Controller
     {
-        public ActionResult Index()
+      public ActionResult Index()
         {
             if (User.IsInRole("Admin"))
                 using (var database = new HMSContext())
