@@ -1,0 +1,222 @@
+﻿@model IEnumerable<HotelManagementWeb.Models.Room>
+@{
+    ViewBag.Title = "Rooms";
+    var SingleRooms = Model.ToList().FindAll(item => item.Type == "Single");
+    var DoubleRooms = Model.ToList().FindAll(item => item.Type == "Double");
+    var QuadRooms = Model.ToList().FindAll(item => item.Type == "Quad");
+    var TripleRooms = Model.ToList().FindAll(item => item.Type == "Triple");
+    var QueenRooms = Model.ToList().FindAll(item => item.Type == "Queen");
+    var KingRooms = Model.ToList().FindAll(item => item.Type == "King");
+    var TwinRooms = Model.ToList().FindAll(item => item.Type == "Twin");
+    var OtherRooms = Model.ToList().FindAll(item => item.Type != "Single" && item.Type != "Twin" &&
+    item.Type != "Double" && item.Type != "King" && item.Type != "Quad" && item.Type != "Triple" && item.Type != "Queen");
+}
+
+<style>
+    .ribbon {
+        font-size: 20px;
+        position: relative;
+        display: inline-block;
+        
+        margin: 5em;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    .text {
+        display: inline-block;
+        padding: 0.5em 1em;
+        min-width: 20em;
+        line-height: 1.2em;
+        background: #FFD72A;
+        position: relative;
+    }
+
+        .ribbon:after, .ribbon:before,
+        .text:before, .text:after,
+        .bold:before {
+            content: '';
+            position: absolute;
+            border-style: solid;
+        }
+
+    .ribbon:before {
+        top: 0.3em;
+        left: 0.2em;
+        width: 100%;
+        height: 100%;
+        border: none;
+        background: #EBECED;
+        z-index: -2;
+    }
+
+    .text:before {
+        bottom: 100%;
+        left: 0;
+        border-width: .5em .7em 0 0;
+        border-color: transparent #FC9544 transparent transparent;
+    }
+
+    .text:after {
+        top: 100%;
+        right: 0;
+        border-width: .5em 2em 0 0;
+        border-color: #FC9544 transparent transparent transparent;
+    }
+
+    .ribbon:after, .bold:before {
+        top: 0.5em;
+        right: -2em;
+        border-width: 1.1em 1em 1.1em 3em;
+        border-color: #FECC30 transparent #FECC30 #FECC30;
+        z-index: -1;
+    }
+
+    .bold:before {
+        border-color: #EBECED transparent #EBECED #EBECED;
+        top: 0.7em;
+        right: -2.3em;
+    }
+    h1 {
+        font: bold 100% sans-serif;
+        letter-spacing: 0.5em;
+        text-align: center;
+        text-transform: uppercase;
+        color: white;
+        font-size: larger
+    }
+
+    div.container {
+        margin-top: 20px;
+        border-radius: 10px;
+    }
+</style>
+
+<div class="container-fluid mb-8">
+    <div class="container  border-r-0 bg-purple-700">
+        <h1 class="text-white">Available Rooms (<span class="font-bold">@Model.Count()</span>)</h1>
+    </div>
+</div>
+
+@*<h2 class="text-center text-bold">There are @Model.ToList().Count rooms Available in the given date</h2>*@
+@if (Model.ToList().Count == 0)
+{
+    <h2 class="text-center">There are no Rooms Available in the searched date</h2>
+
+
+}
+
+<div class="container-fluid  p-6 mb-16 bg-gray-100 " style="margin-left:50px;margin-right:50px">
+
+    @if (SingleRooms.Count != 0)
+    {
+        <div class="col-lg-12">
+
+            <p class="ribbon ">
+                <span class="text"><strong class="bold">Single Room (@SingleRooms.Count)</strong> </span>
+            </p><br />
+
+            @foreach (var item in SingleRooms)
+            {
+
+                { Html.RenderPartial("RoomCard", item); }
+            }
+
+        </div>}
+   
+    @if (DoubleRooms.Count != 0)
+    {<div class="col-lg-12">
+            <p class="ribbon">
+                <span class="text"><strong class="bold">Double Room (@DoubleRooms.Count)</strong> </span>
+            </p>
+            <br />
+            @foreach (var item in DoubleRooms)
+            {
+
+                { Html.RenderPartial("RoomCard", item); }
+            }
+        </div>
+    }
+    @if (TripleRooms.Count != 0)
+    {
+        <div class="col-lg-12">
+            <p class="ribbon ">
+                <span class="text"><strong class="bold">Triple Room (@TripleRooms.Count)</strong> </span>
+            </p><br />
+
+            @foreach (var item in TripleRooms)
+            {
+
+            { Html.RenderPartial("RoomCard", item); }
+            }
+        </div>
+    }
+    @if (KingRooms.Count != 0)
+    {
+        <div class="col-lg-12">
+            <p class="ribbon ">
+                <span class="text"><strong class="bold">King Room (@KingRooms.Count)</strong> </span>
+            </p><br />
+
+            @foreach (var item in KingRooms)
+            {
+
+                { Html.RenderPartial("RoomCard", item); }
+            }
+
+        </div>
+    }
+    @if (TwinRooms.Count != 0)
+    {<div class="col-lg-12">
+            <p class="ribbon ">
+                <span class="text"><strong class="bold">Twin Room (@TwinRooms.Count)</strong> </span>
+            </p><br />
+
+            @foreach (var item in TwinRooms)
+            {
+
+                { Html.RenderPartial("RoomCard", item); }
+            }
+        </div>
+    }
+    @if (QuadRooms.Count != 0)
+    {
+<div class="col-lg-12">
+    <p class="ribbon ">
+        <span class="text"><strong class="bold">Quad Room (@QuadRooms.Count)</strong> </span>
+    </p>
+    <br />
+    @foreach (var item in QuadRooms)
+    {
+
+        { Html.RenderPartial("RoomCard", item); }
+    }
+</div>
+    }
+    @if (QueenRooms.Count != 0)
+    {<div class="col-lg-12">
+            <p class="ribbon ">
+                <span class="text"><strong class="bold">Queen Room (@QueenRooms.Count)</strong> </span>
+            </p><br />
+
+            @foreach (var item in QueenRooms)
+            {
+
+                { Html.RenderPartial("RoomCard", item); }
+            }
+        </div>
+    }
+    @if (OtherRooms.Count != 0)
+    {<div class="col-lg-12">
+            <p class="ribbon ">
+                <span class="text"><strong class="bold">Others (@OtherRooms.Count)</strong> </span>
+            </p><br />
+
+            @foreach (var item in OtherRooms)
+            {
+
+                { Html.RenderPartial("RoomCard", item); }
+            }
+        </div>
+    }
+</div>

@@ -90,14 +90,14 @@
 @if (Model.ToList().Count != 0)
 {
 
-<div class="container-fluid  " style="margin-left:50px;margin-right:50px">
+<div class="container-fluid  bg-orange-200 " style="margin-left:50px;margin-right:50px"; >
     
     @foreach (var data in Model)
     {
         <div class="col-md-5 col-lg-4 mt-10">
             <div class="card card-1  " style="min-width:300px;background-image:url(@data.QRCode); border-bottom: 3px solid rgb(126 34 206);">
                 <div class="invoice-ribbon"><div class="ribbon-inner">Booked</div></div>
-                <img src="https://image.flaticon.com/icons/png/512/488/488682.png" class=" h-16 pull-left" />
+                @*<img src="https://image.flaticon.com/icons/png/512/488/488682.png" class=" h-16 pull-left" />*@
                 <h4 class="mt-2 mb-10 " style="font-weight:bold">Room Number - @data.RoomNumber</h4>
                 <hr />
                 <h5> CheckIn:  @data.BookingFrom.ToShortDateString()</h5>

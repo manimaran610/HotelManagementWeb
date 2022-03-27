@@ -178,7 +178,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageBookingsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\RoomBookingController.cs" />
+    <Compile Include="Controllers\InvoiceController.cs" />
     <Compile Include="Controllers\RoomController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
@@ -201,6 +201,7 @@
     <Compile Include="Models\Booking.cs" />
     <Compile Include="Models\BookingStatus.cs" />
     <Compile Include="Models\CheckInOut.cs" />
+    <Compile Include="Models\HelperClass.cs" />
     <Compile Include="Models\HMSContext.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -278,7 +279,7 @@
     <Content Include="Views\Dashboard\ConfirmDelete.cshtml" />
     <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\Home\RoomCard.cshtml" />
-    <Content Include="Views\Home\Rooms.cshtml" />
+    <Content Include="Views\Home\AvailableRooms.cshtml" />
     <Content Include="Views\Shared\DashboardLayoutView.cshtml" />
     <Content Include="Views\ManageBookings\Bookings.cshtml" />
     <Content Include="Views\User\_ViewStart.cshtml" />
@@ -288,8 +289,8 @@
     <Content Include="Views\Room\AddOrUpdateRoom.cshtml" />
     <Content Include="Views\Room\_ViewStart.cshtml" />
     <Content Include="Views\Room\AddRoomPost.cshtml" />
-    <Content Include="Views\RoomBooking\BookingInvoice.cshtml" />
-    <Content Include="Views\RoomBooking\BookedScreen.cshtml" />
+    <Content Include="Views\Invoice\BookingInvoice.cshtml" />
+    <Content Include="Views\Invoice\BookedScreen.cshtml" />
     <Content Include="Views\Home\UserProfile.cshtml" />
     <Content Include="Views\ManageBookings\_ViewStart.cshtml" />
   </ItemGroup>
