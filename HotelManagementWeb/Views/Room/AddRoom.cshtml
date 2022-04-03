@@ -1,0 +1,13 @@
+﻿@model HotelManagementWeb.Models.Room
+@{
+    ViewBag.Title = "Add Room";
+    ViewData["PostAction"] = "AddRoom";
+    ViewBag.required = "required";
+    Layout = "~/Views/Shared/DashboardLayoutView.cshtml";
+
+}
+
+@{
+    Html.RenderPartial("AddOrUpdateRoom", Model);
+}
+

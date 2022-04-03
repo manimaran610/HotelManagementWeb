@@ -1,12 +1,9 @@
 ﻿
 
 using HotelManagementWeb.Models;
-using QRCoder;
+
 using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.IO;
+
 using System.Linq;
 
 using System.Web.Mvc;
@@ -29,10 +26,13 @@ namespace HotelManagementWeb.Controllers
             if (ModelState.IsValid)
             {
                 if (model.CheckIn.Date < DateTime.Now.Date || model.CheckOut.Date < DateTime.Now.Date || model.CheckOut.Date <= model.CheckIn.Date) 
-                {
-                    if (model.CheckIn.Date < DateTime.Now.Date) ViewData["CheckInError"] = "Date must be greater than or equal to Today's Date";
-                    if (model.CheckOut.Date < DateTime.Now.Date) ViewData["CheckOutError"] = "Date must be greater than Today's Date";
-                    if (model.CheckOut.Date <= model.CheckIn.Date) ViewData["CheckOutError"] = "Date must be greater than CheckIn Date";
+                {  
+                    if (model.CheckIn.Date < DateTime.Now.Date) 
+                        ModelState.AddModelError("CheckIn","Date must be greater than or equal to Today's Date");
+                    if (model.CheckOut.Date < DateTime.Now.Date) 
+                        ModelState.AddModelError("CheckOut", "Date must be greater than Today's Date");
+                    if (model.CheckOut.Date <= model.CheckIn.Date) 
+                        ModelState.AddModelError("CheckOut", "Date must be greater than CheckIn Date");
                     return View(model);
                 }
             }
@@ -58,7 +58,7 @@ namespace HotelManagementWeb.Controllers
         {
             if (model.CheckIn.Date < DateTime.Now.Date) return View("Error");
             
-                return View(HelperClass.AvailableRoomList(model));
+                return View(HelperClass.AvailableRooms(model));
             
         }
 
@@ -85,7 +85,7 @@ namespace HotelManagementWeb.Controllers
         }
 
 
-        //QR code Generator
+      
 
 
     }

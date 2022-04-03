@@ -1,8 +1,6 @@
 ﻿using HotelManagementWeb.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace HotelManagementWeb.Controllers
@@ -12,26 +10,32 @@ namespace HotelManagementWeb.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult GetAll()
         {
-            if (User.IsInRole("Admin"))
-                using (var database = new ApplicationDbContext())
-                {
-                    return View(database.Users.ToList());
-                }
-            return new HttpNotFoundResult();
+            try
+            {
+                List<ApplicationUser> applicationUsers = UserDatabaseLayer.GetAllUsers();
+                return View(applicationUsers);
+
+            }
+            catch (Exception exception)
+            {
+                return new HttpNotFoundResult();
+            }
+
         }
 
 
         public ActionResult DeleteUser(string Id)
         {
-            if (User.IsInRole("Admin"))
+            if (User.IsInRole("Admin") && Id !=null)
             {
-                if (Id == null) return new HttpNotFoundResult();
-                using (var database = new ApplicationDbContext())
+                try
                 {
-                    var User = database.Users.Where(user => user.Id == Id).First();
-                    database.Users.Remove(User);
-                    database.SaveChanges();
+                    UserDatabaseLayer.DeleteUser(Id);
                     return RedirectToAction("GetAll");
+                }
+                catch (Exception exception)
+                {
+                    return new HttpNotFoundResult();
                 }
             }
             return new HttpNotFoundResult();

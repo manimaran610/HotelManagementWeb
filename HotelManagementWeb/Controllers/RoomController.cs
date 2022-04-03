@@ -9,140 +9,142 @@ using System.Web.Mvc;
 
 namespace HotelManagementWeb.Controllers
 {
+
+
     [Authorize(Roles = "Admin")]
     public class RoomController : Controller
     {
+        readonly string Admin = "Admin";
         private Random randomnumber = new Random();
 
 
         [HttpGet]
-        public ActionResult AddRoom(Room model)
+        public ActionResult AddRoom()
         {
-            if (User.IsInRole("Admin"))
+            if (User.IsInRole(Admin))
             {
-                ViewBag.Title = "Add Room";
-                ViewData["PostAction"] = "AddRoomPost";
-                ViewBag.required = "required";
-                using (var database = new HMSContext())
-                {
-                    model.RoomTypeList = database.RoomTypes.ToList();
-                    model.BookStatusList = database.BookingStatus.ToList();
-                    ModelState.Clear();
-                    if (model.ErrorMessage != null) ModelState.AddModelError("RoomNumber", model.ErrorMessage);
-                    return PartialView("AddOrUpdateRoom", model);
-                }
+                Room model = new Room();
+                HelperClass.FillDropDownListItems(model);
+                ModelState.Clear();
+                return View(model);
             }
             return new HttpNotFoundResult();
         }
 
 
+
+        [HttpGet]
         public ActionResult EditRoom(Room model)
         {
-            if (User.IsInRole("Admin"))
-                using (var database = new HMSContext())
-                {
-                    // Room model = database.Rooms.ToList().Find(item => item.RoomId == Id);
-                    if (model != null)
-                    {
-                        model.RoomTypeList = database.RoomTypes.ToList();
-                        model.BookStatusList = database.BookingStatus.ToList();
-                        ViewBag.Title = "Update Room";
-                        ViewData["PostAction"] = "UpdateRoomPost";
-                        if (model.ErrorMessage != null) ModelState.AddModelError("RoomNumber", model.ErrorMessage);
-                        return PartialView("AddOrUpdateRoom", model);
-                    }
-                    return View("Error");
-                }
-
-            return new HttpNotFoundResult();
-        }
-
-
-
-
-        [ValidateAntiForgeryToken]
-        [HttpPost]
-        public ActionResult AddRoomPost(Room model)
-        {
-            if (User.IsInRole("Admin"))
-                using (var database = new HMSContext())
-                {
-                    bool IsValid = database.Rooms.ToList().Exists(item => item.RoomNumber == model.RoomNumber);
-                    if (ModelState.IsValid && !IsValid)
-                    {
-                        // Image saving in the project folder
-                        string ImageName = model.RoomNumber + randomnumber.Next() + Path.GetExtension(model.UploadedImage.FileName);
-                        model.UploadedImage.SaveAs(Server.MapPath("~/Content/RoomImages/" + ImageName));
-                        model.RoomImage = ImageName;
-
-                        ////Image saving as bytes in the database
-                        //Byte[] ImgByte = new byte[model.UploadedImage.ContentLength];
-                        //model.UploadedImage.InputStream.Read(ImgByte, 0, model.UploadedImage.ContentLength);
-                        //model.ImageByte = Convert.ToBase64String(ImgByte);
-
-                        model.IsActive = true;
-                        database.Rooms.Add(model);
-                        database.SaveChanges();
-                        return RedirectToAction("index", "dashboard");
-                    }
-                    else
-                    {
-                        model.ErrorMessage = "Room Number already exists";
-                        return RedirectToAction("AddRoom", model);
-                    }
-                }
-            return new HttpNotFoundResult();
-
-        }
-
-        [ValidateAntiForgeryToken]
-        [HttpPost]
-        public ActionResult UpdateRoomPost(Room model)
-        {
-
-            using (var database = new HMSContext())
+            if (User.IsInRole(Admin))
             {
-                bool IsValid = database.Rooms.ToList().Exists(item => item.RoomNumber == model.RoomNumber && item.RoomId != model.RoomId);
-                if (ModelState.IsValid && !IsValid)
+                if (model != null)
                 {
-                    if (model.UploadedImage != null)
-                    {
-                        FileInfo file = new FileInfo(Server.MapPath("~/Content/RoomImages/" + model.RoomImage));
-                        file.Delete();
-                        string ImageName = model.RoomNumber + randomnumber.Next() + Path.GetExtension(model.UploadedImage.FileName);
-                        model.UploadedImage.SaveAs(Server.MapPath("~/Content/RoomImages/" + ImageName));
-                        model.RoomImage = ImageName;
-
-                        //model.ImageByte= new byte[model.UploadedImage.ContentLength];
-                        // model.UploadedImage.InputStream.Read(model.ImageByte, 0, model.UploadedImage.ContentLength);
-
-                    }
-                    database.Rooms.AddOrUpdate(model);
-                    database.SaveChanges();
-                    return RedirectToAction("index", "dashboard");
+                    HelperClass.FillDropDownListItems(model);
+                    return View(model);
                 }
-                else
-                {
-                    model.ErrorMessage = "Room Number already exists with different record";
-                    return RedirectToAction("EditRoom", model);
-                }
+                return View("Error");
             }
-
+            return new HttpNotFoundResult();
         }
 
         public ActionResult DeleteRoom(int Id)
         {
-            if (User.IsInRole("Admin"))
-                using (var database = new HMSContext())
-                {
-                    var room = database.Rooms.Where(item => item.RoomId == Id).First();
-                    database.Rooms.Remove(room);
-                    database.SaveChanges();
-                    FileInfo file = new FileInfo(Server.MapPath("~/Content/RoomImages/" + room.RoomImage));
-                    file.Delete();
-                    return RedirectToAction("Index", "Dashboard");
-                }
+            if (User.IsInRole("Admin") && IsRoomIdAlreadyExists(Id))
+            {
+                var ExistingRoom = HotelDatabaseLayer.GetRooms().Find(item => item.RoomId == Id);
+                RoomCrudOperations.DeleteRoomFromDatabase(ExistingRoom);
+                HelperClass.DeleteExistingImageInProjectFolder(ExistingRoom.RoomImage);
+                return RedirectToAction("Index", "Dashboard");
+            }
             return new HttpNotFoundResult();
         }
+
+
+
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult AddRoom(Room model)
+        {
+            if (User.IsInRole(Admin))
+            {
+                if (ModelState.IsValid && !IsRoomNumberAlreadyExists(model.RoomNumber))
+                {
+                    model.RoomImage = HelperClass.AddImageToProjectFolder(model);
+                    model.IsActive = true;
+                    RoomCrudOperations.AddRoomToDatabase(model);
+                    return RedirectToAction("Index", "Dashboard");
+                }
+                else
+                {
+                    ModelState.AddModelError("RoomNumber", "Room Number already exists");
+                    HelperClass.FillDropDownListItems(model);
+                    return View(model);
+                }
+
+            }
+            return new HttpNotFoundResult();
+
+        }
+
+
+
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult UpdateExistingRoom(Room model)
+        {
+
+                if (ModelState.IsValid && !IsRoomNumberAlreadyExists(model.RoomNumber,model.RoomId))
+                {
+                    if (model.UploadedImage != null)
+                    {
+                        HelperClass.DeleteExistingImageInProjectFolder(model.RoomImage);
+                        model.RoomImage = HelperClass.AddImageToProjectFolder(model);                //Generates random room name ,save it and return that image name
+                    }
+                    RoomCrudOperations.UpdateExistingRoomInDatabase(model);
+                    return RedirectToAction("index", "dashboard");
+                }
+                else
+                {
+                    ModelState.AddModelError("RoomNumber", "Room Number already exists with different record");
+                    HelperClass.FillDropDownListItems(model);
+                    return View("EditRoom", model);
+                }
+            }
+
+        
+
+     
+
+        private bool IsRoomNumberAlreadyExists(int? RoomNumber)
+        {
+            if (RoomNumber != null)
+            {
+
+                return HotelDatabaseLayer.GetRooms().Exists(item => item.RoomNumber == RoomNumber);
+            }
+            else throw new ArgumentNullException();
+        }
+
+        private bool IsRoomNumberAlreadyExists(int? RoomNumber,int Id)
+        {
+            if (RoomNumber != null)
+            {
+               
+                return HotelDatabaseLayer.GetRooms().Exists(item => item.RoomNumber == RoomNumber && item.RoomId !=Id);
+            }
+            else throw new ArgumentNullException();
+        }
+
+        private bool IsRoomIdAlreadyExists(int? Id)
+        {
+            if (Id != null)
+            {
+                return HotelDatabaseLayer.GetRooms().Exists(item => item.RoomId == Id);
+            }
+            else throw new ArgumentNullException();
+        }
+
+
     }
 }

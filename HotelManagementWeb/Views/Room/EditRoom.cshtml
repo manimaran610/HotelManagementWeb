@@ -1,0 +1,11 @@
+﻿@model HotelManagementWeb.Models.Room
+@{
+    ViewBag.Title = "Update Room";
+    ViewData["PostAction"] = "UpdateExistingRoom";
+
+}
+
+@{
+    Html.RenderPartial("AddOrUpdateRoom", Model);
+}
+

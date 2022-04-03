@@ -5,6 +5,7 @@ using System.Linq;
 
 using System.Web.Mvc;
 
+
 namespace HotelManagementWeb.Controllers
 {
     public class InvoiceController : Controller
@@ -13,12 +14,12 @@ namespace HotelManagementWeb.Controllers
         public ActionResult BookingInvoice(int RoomId, int RoomCapacity, DateTime CheckIn, DateTime CheckOut, decimal RoomPrice,string Type)
         {
             //if (RoomId == null) return View("Error");
-            var db = new ApplicationDbContext();
-            var data = db.Users.Where(item => item.Email == User.Identity.Name).First();
+          
+            var ApplicationUser = UserDatabaseLayer.GetAllUsers().Find(item => item.Email == User.Identity.Name);
 
             var model = new Booking();
-            model.CustomerName = data.FullName;
-            model.CustomerEmail = data.Email;
+            model.CustomerName = ApplicationUser.FullName;
+            model.CustomerEmail = ApplicationUser.Email;
             model.AssignRoomId = RoomId;
             model.NoOfMembers = RoomCapacity;
             model.BookingFrom = CheckIn;
@@ -26,7 +27,7 @@ namespace HotelManagementWeb.Controllers
             model.NumberOfDays = (CheckOut - CheckIn).Days;
             model.RoomPrice = RoomPrice;
             model.MaxCapacity = RoomCapacity;
-            model.MobileNo = Decimal.Round(Decimal.Parse(data.PhoneNumber)).ToString();
+            model.MobileNo = Decimal.Round(Decimal.Parse(ApplicationUser.PhoneNumber)).ToString();
             model.ValueAddedTax = Decimal.Round(Decimal.Multiply((Decimal)RoomPrice, (Decimal)0.18));
             model.TotalAmount = model.RoomPrice + model.ValueAddedTax;
             model.TotalAmount = Decimal.Multiply((Decimal)model.TotalAmount, model.NumberOfDays);
@@ -36,24 +37,27 @@ namespace HotelManagementWeb.Controllers
         }
 
         [HttpPost]
-        public ActionResult BookingInvoice(Booking model = null)
+        public ActionResult BookingInvoice(Booking model=null)
         {
             if (model == null) return View("Error");
             if (ModelState.IsValid)
             {
                 if (model.NoOfMembers > model.MaxCapacity)
                 {
-                    ViewData["NoOfMembers"] = "Maximum capacity is upto " + model.MaxCapacity + "  person";
+                    ModelState.AddModelError("Capacity", "Maximum capacity is upto " + model.MaxCapacity + "  person");
                     return View(model);
                 }
-                using (var database = new HMSContext())
+                try
                 {
-                    database.Bookings.Add(model);
-                    database.SaveChanges();
+                    BookingOperations.AddNewBookings(model);
+                    return PartialView("BookedScreen");
                 }
-                return PartialView("BookedScreen");
-            }
-            return RedirectToAction("BookingInvoice", model);
+                catch (Exception exception)
+                {
+                    return View("Error");
+                }
+            
+            }  return RedirectToAction("BookingInvoice", model);
         }
        
     }

@@ -41,11 +41,6 @@ namespace HotelManagementWeb.Models
         [Display(Name = "Description")]
         public string RoomDescription { get; set; }
 
-
-      [NotMapped]
-        public Byte[] ImageByte { get; set; }
-
-
         public bool IsActive { get; set; }
 
 
@@ -71,15 +66,17 @@ namespace HotelManagementWeb.Models
         public string Type { get; set; }
 
 
-        [NotMapped]
-
-        public string ErrorMessage { get; set; }
+      
 
         [NotMapped]
         public DateTime CheckIn { get; set; }
 
         [NotMapped]
         public DateTime CheckOut { get; set; }
+
+        [NotMapped]
+        public Byte[] ImageByte { get; set; }
+
     }
 }
 
